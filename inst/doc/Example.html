@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Example</title>
+
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Example</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(metacore)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(XML)</span></code></pre></div>
+<p><a href="https://www.cdisc.org/">CDISC</a> standards provide a standard for submission of data set metadata through a document known as define.xml. The define provides a great deal of useful information that is both machine readable and can be viewed through your web browser. While many organizations wait to produce a define until the datasets are finalized, it can still be advantageous to be able to read metadata directly from a define. For this purpose, we developed readers that can go directly from a define.xml to a metacore object.</p>
+<p>To do this, we’ve built separate reader function for each of the metacore tables. For more information on the structure of the metacore tables, check out the README.</p>
+<p>We start by reading the define from disk using the <code>xmlTreeParse()</code> function from the <code>XML</code> package.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>doc &lt;-<span class="st"> </span><span class="kw">xmlTreeParse</span>(<span class="kw">metacore_example</span>(<span class="st">&quot;SDTM_define.xml&quot;</span>), <span class="dt">useInternalNodes =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p>Next, we use the metacore readers for each of the separate tables necessary for a metacore object.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>ds_spec2 &lt;-<span class="st"> </span><span class="kw">xml_to_ds_spec</span>(doc)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>ds_vars &lt;-<span class="st"> </span><span class="kw">xml_to_ds_vars</span>(doc)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>var_spec &lt;-<span class="st"> </span><span class="kw">xml_to_var_spec</span>(doc)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>value_spec &lt;-<span class="st"> </span><span class="kw">xml_to_value_spec</span>(doc)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>code_list &lt;-<span class="st"> </span><span class="kw">xml_to_codelist</span>(doc)</span>
+<span id="cb3-6"><a href="#cb3-6"></a>derivations &lt;-<span class="st"> </span><span class="kw">xml_to_derivations</span>(doc)</span></code></pre></div>
+<p>Great! Now we’re ready to create our metacore object.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>test &lt;-<span class="st"> </span><span class="kw">metacore</span>(ds_spec2, ds_vars, var_spec, value_spec, derivations, code_list)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Warning: core from the ds_vars table only contain missing values.</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; </span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; supp_flag from the ds_vars table only contain missing values.</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; </span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; common from the var_spec table only contain missing values.</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; Warning: The following derivations are never used:</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt;  MT.SUPPAE.QVAL: see value level metadata</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt;  MT.SUPPDM.QVAL: see value level metadata</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; Warning: The following codelist(s) are never used:</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt;  DRUG DICTIONARY</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt;  MEDICAL HISTORY DICTIONARY</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; </span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt;  Metadata successfully imported</span></span></code></pre></div>
+<p>Something to note about a metacore object is that it inherently holds all data from your source of metadata, be it your specification, define.xml, database, etc. So that means you have <em>all</em> the metadata. In your program, it’s likely that you’ll just want to keep metadata relevant to the dataset you’re currently programming. We’ve made process easily, with functions that filter metadata down to information only relevant to a specific dataset.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># a metacore object with all your dataframes</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>subset &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_dataset</span>(<span class="st">&quot;DM&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>subset<span class="op">$</span>ds_spec</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; # A tibble: 1 × 3</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;   dataset structure              label       </span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;                  &lt;chr&gt;       </span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; 1 DM      One record per subject Demographics</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co"># a simplified dataframe </span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>subset_t &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_dataset</span>(<span class="st">&quot;DM&quot;</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p>As can be seen above, the metacore object can be filtered directly, or by using the <code>simplify = TRUE</code> argument, a simplified data frame can be returned.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>subset_t</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; # A tibble: 25 × 19</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;    dataset variable key_seq order keep  core  supp_flag type     length label   </span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;      &lt;int&gt; &lt;int&gt; &lt;lgl&gt; &lt;chr&gt; &lt;lgl&gt;     &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;   </span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt;  1 DM      STUDYID        1     1 TRUE  &lt;NA&gt;  NA        text         12 Study I…</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt;  2 DM      DOMAIN        NA     2 TRUE  &lt;NA&gt;  NA        text          2 Domain …</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;  3 DM      USUBJID        2     3 TRUE  &lt;NA&gt;  NA        text         11 Unique …</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;  4 DM      SUBJID        NA     4 TRUE  &lt;NA&gt;  NA        text          4 Subject…</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;  5 DM      RFSTDTC       NA     5 FALSE &lt;NA&gt;  NA        date         10 Subject…</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;  6 DM      RFENDTC       NA     6 FALSE &lt;NA&gt;  NA        date         10 Subject…</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt;  7 DM      RFXSTDTC      NA     7 FALSE &lt;NA&gt;  NA        datetime     20 Date/Ti…</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt;  8 DM      RFXENDTC      NA     8 FALSE &lt;NA&gt;  NA        datetime     20 Date/Ti…</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt;  9 DM      RFICDTC       NA     9 FALSE &lt;NA&gt;  NA        datetime     20 Date/Ti…</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; 10 DM      RFPENDTC      NA    10 FALSE &lt;NA&gt;  NA        datetime     20 Date/Ti…</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; # … with 15 more rows, and 9 more variables: format &lt;chr&gt;, common &lt;lgl&gt;,</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; #   origin &lt;chr&gt;, code_id &lt;chr&gt;, where &lt;chr&gt;, derivation_id &lt;chr&gt;,</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; #   derivation &lt;chr&gt;, name &lt;chr&gt;, codes &lt;list&gt;</span></span></code></pre></div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
