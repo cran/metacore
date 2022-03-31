@@ -1,7 +1,7 @@
 Package: metacore
 Title: A Centralized Metadata Object Focus on Clinical Trial Data
         Programming Workflows
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: 
     c(person(given = "Christina",
              family = "Fillmore",
@@ -33,7 +33,7 @@ Imports: R6, tidyr, dplyr, stringr, magrittr, XML, purrr, readxl,
         rlang, tibble, tidyselect
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2022-02-11 19:11:05 UTC; christina
+Packaged: 2022-03-30 09:30:20 UTC; christina
 Author: Christina Fillmore [aut, cre] (<https://orcid.org/0000-0003-0595-2302>),
   Maya Gans [aut] (<https://orcid.org/0000-0002-5452-6089>),
   Ashley Tarasiewicz [aut],
@@ -42,4 +42,4 @@ Author: Christina Fillmore [aut, cre] (<https://orcid.org/0000-0003-0595-2302>),
 Maintainer: Christina Fillmore <christina.e.fillmore@gsk.com>
 Depends: R (>= 3.5.0)
 Repository: CRAN
-Date/Publication: 2022-02-14 10:00:02 UTC
+Date/Publication: 2022-03-31 15:00:02 UTC

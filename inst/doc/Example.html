@@ -349,14 +349,22 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; supp_flag from the ds_vars table only contain missing values.</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; </span></span>
 <span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; common from the var_spec table only contain missing values.</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; Warning: The following derivations are never used:</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt;  MT.SUPPAE.QVAL: see value level metadata</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt;  MT.SUPPDM.QVAL: see value level metadata</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; Warning: The following codelist(s) are never used:</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt;  DRUG DICTIONARY</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt;  MEDICAL HISTORY DICTIONARY</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; </span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; dataset from the supp table only contain missing values.</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; </span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; variable from the supp table only contain missing values.</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; </span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; idvar from the supp table only contain missing values.</span></span>
 <span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; </span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt;  Metadata successfully imported</span></span></code></pre></div>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt; qeval from the supp table only contain missing values.</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt; Warning: The following derivations are never used:</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt;  MT.SUPPAE.QVAL: see value level metadata</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt;  MT.SUPPDM.QVAL: see value level metadata</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt; Warning: The following codelist(s) are never used:</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt;  DRUG DICTIONARY</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt;  MEDICAL HISTORY DICTIONARY</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; </span></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt;  Metadata successfully imported</span></span></code></pre></div>
 <p>Something to note about a metacore object is that it inherently holds all data from your source of metadata, be it your specification, define.xml, database, etc. So that means you have <em>all</em> the metadata. In your program, it’s likely that you’ll just want to keep metadata relevant to the dataset you’re currently programming. We’ve made process easily, with functions that filter metadata down to information only relevant to a specific dataset.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># a metacore object with all your dataframes</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>subset &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_dataset</span>(<span class="st">&quot;DM&quot;</span>)</span>
@@ -370,7 +378,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb5-10"><a href="#cb5-10"></a>subset_t &lt;-<span class="st"> </span>test <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_dataset</span>(<span class="st">&quot;DM&quot;</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>As can be seen above, the metacore object can be filtered directly, or by using the <code>simplify = TRUE</code> argument, a simplified data frame can be returned.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>subset_t</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; # A tibble: 25 × 19</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; # A tibble: 25 × 22</span></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;    dataset variable key_seq order keep  core  supp_flag type     length label   </span></span>
 <span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;      &lt;int&gt; &lt;int&gt; &lt;lgl&gt; &lt;chr&gt; &lt;lgl&gt;     &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;   </span></span>
 <span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt;  1 DM      STUDYID        1     1 TRUE  &lt;NA&gt;  NA        text         12 Study I…</span></span>
@@ -383,9 +391,10 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt;  8 DM      RFXENDTC      NA     8 FALSE &lt;NA&gt;  NA        datetime     20 Date/Ti…</span></span>
 <span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt;  9 DM      RFICDTC       NA     9 FALSE &lt;NA&gt;  NA        datetime     20 Date/Ti…</span></span>
 <span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; 10 DM      RFPENDTC      NA    10 FALSE &lt;NA&gt;  NA        datetime     20 Date/Ti…</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; # … with 15 more rows, and 9 more variables: format &lt;chr&gt;, common &lt;lgl&gt;,</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; #   origin &lt;chr&gt;, code_id &lt;chr&gt;, where &lt;chr&gt;, derivation_id &lt;chr&gt;,</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; #   derivation &lt;chr&gt;, name &lt;chr&gt;, codes &lt;list&gt;</span></span></code></pre></div>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; # … with 15 more rows, and 12 more variables: format &lt;chr&gt;, common &lt;lgl&gt;,</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; #   sig_dig &lt;int&gt;, origin &lt;chr&gt;, code_id &lt;chr&gt;, where &lt;chr&gt;,</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; #   derivation_id &lt;chr&gt;, derivation &lt;chr&gt;, name &lt;chr&gt;, codes &lt;list&gt;,</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt; #   idvar &lt;chr&gt;, qeval &lt;chr&gt;</span></span></code></pre></div>
 
 
 
