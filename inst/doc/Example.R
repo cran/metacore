@@ -6,10 +6,11 @@ knitr::opts_chunk$set(
 
 ## ----setup--------------------------------------------------------------------
 library(metacore)
-library(XML)
+library(xml2)
 
 ## -----------------------------------------------------------------------------
-doc <- xmlTreeParse(metacore_example("SDTM_define.xml"), useInternalNodes = TRUE)
+doc <- read_xml(metacore_example("SDTM_define.xml"))
+xml_ns_strip(doc)
 
 ## -----------------------------------------------------------------------------
 ds_spec2 <- xml_to_ds_spec(doc)

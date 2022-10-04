@@ -126,7 +126,7 @@ codelist_check <- function(value_spec, codelist){
       variables <- not_in_val %>%
          pull(.data$variable) %>%
          str_c(collapse = "\n ")
-      message <- paste("The following variables hace code ids not found in the codelist(s):\n",
+      message <- paste("The following variables have code ids not found in the codelist(s):\n",
                        variables, "\n")
       warning(message, call. = FALSE)
    }
@@ -261,7 +261,7 @@ all_message <- function() {
    "ds_vars",     "key_seq",       is.numeric,                  TRUE,
    "ds_vars",     "order",         is.numeric,                  TRUE,
    "ds_vars",     "keep",          is.logical,                  TRUE,
-   "ds_vars",     "core",          check_words("Expected", "Required", "Permissible", "Conditionally Required", "Conditionally Expected"), TRUE,
+   "ds_vars",     "core",          check_words("Expected", "Required", "Permissible", "Conditionally Required", "Conditionally Expected", NA), TRUE,
    "ds_vars",     "supp_flag",     is.logical,                  TRUE,
    "var_spec",    "variable",      is.character,                FALSE,
    "var_spec",    "type",          is.character,                TRUE,
@@ -271,7 +271,7 @@ all_message <- function() {
    "var_spec",    "common",        is.logical,                  TRUE,
    "value_spec",  "type",          is.character,                TRUE,
    "value_spec",  "sig_dig",       is.integer,                  TRUE,
-   "value_spec",  "origin",        is.character,                TRUE,
+   "value_spec",  "origin",        function(x){str_detect(x, "collected|derived|assigned|protocol|predecessor|crf.*")||is.na(x)},                TRUE,
    "value_spec",  "code_id",       is.character,                TRUE,
    "value_spec",  "dataset",       is.character,                FALSE,
    "value_spec",  "where",         is.character,                TRUE,
