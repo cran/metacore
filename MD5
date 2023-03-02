@@ -1,9 +1,9 @@
-e62826ba41ae03327a3de73c8c047429 *DESCRIPTION
+8d6145a13ae81fc53aaae1a0f0c63472 *DESCRIPTION
 78eea76045d27c0511df3ff173492b5b *LICENSE
 c857395fceafe9289ee72603f1131ab7 *NAMESPACE
-0559ddcbbda56de754ae7185264072c9 *NEWS.md
-f2eed31a51322a120636bcf062f22c0c *R/checks.R
-4429c53d6a800d0f003172dbfa0a4007 *R/metacore.R
+baafc67deced50de4f8a1b3fe0164ffa *NEWS.md
+f8051853d200bcc212bce11181711fc3 *R/checks.R
+cf792f03d2e4fdf4ccbedcd0b8836a1d *R/metacore.R
 64f473f3e67940796bb6701f42fa008f *R/spec_builder.R
 65cef5e0674056f6fc07dd2b3ca85c13 *R/utils-pipe.R
 4531411d1315f120b3ac4cbe0196990d *R/utils.R
@@ -11,7 +11,7 @@ f2eed31a51322a120636bcf062f22c0c *R/checks.R
 60674ccf7087e6eb4029934fd8788e20 *R/xml_builders.R
 ffe2c9ae6b01bcec7ec65fce211bd8c8 *R/xml_helpers.R
 65b548f943995d09ec31fb4f414b389f *R/zzz.R
-7bf3afbade0d13e9e27370fa35ed1343 *README.md
+40d63f6dc624cfaf526c88b07beafc19 *README.md
 b67aced5ab93185fa3f926a06b2a3252 *build/vignette.rds
 2ba600db75612220f69099c94d132371 *inst/doc/Building_Specification_Readers.R
 be56563a7ba39f22eae9cea92c94bc3d *inst/doc/Building_Specification_Readers.Rmd
@@ -74,7 +74,7 @@ ef06464bb60ff863b5779c2f48196477 *tests/testthat/metacore-figure/unnamed-chunk-1
 ef06464bb60ff863b5779c2f48196477 *tests/testthat/metacore-figure/unnamed-chunk-2-1.png
 5adb9194018a93bdc82c97136270a91b *tests/testthat/spec_no_val.xlsx
 be3512acaaa434121ed98e55dc87b148 *tests/testthat/test-checks.R
-70a8148479d332994b7bf2267a88aabc *tests/testthat/test-metacore.R
+bdec2630492ba198a0af95f316f0ca1b *tests/testthat/test-metacore.R
 2415716a16fc061f92cdf5d5e16f5fd5 *tests/testthat/test-reader.R
 b7af5ca66c390a2a1dbf16f57ac81bd5 *tests/testthat/test-utils.R
 28f036eb25dabba4ebcf7c0fccb76f62 *tests/testthat/test-validators.R
