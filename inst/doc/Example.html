@@ -340,8 +340,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metacore)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xml2)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(metacore)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(xml2)</span></code></pre></div>
 <p><a href="https://www.cdisc.org/">CDISC</a> standards provide a
 standard for submission of data set metadata through a document known as
 define.xml. The define provides a great deal of useful information that
@@ -356,43 +356,43 @@ tables, check out the README.</p>
 <p>We start by reading the define from disk using the
 <code>xmlTreeParse()</code> function from the <code>XML</code>
 package.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>doc <span class="ot">&lt;-</span> <span class="fu">read_xml</span>(<span class="fu">metacore_example</span>(<span class="st">&quot;SDTM_define.xml&quot;</span>))</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xml_ns_strip</span>(doc)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>doc <span class="ot">&lt;-</span> <span class="fu">read_xml</span>(<span class="fu">metacore_example</span>(<span class="st">&quot;SDTM_define.xml&quot;</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">xml_ns_strip</span>(doc)</span></code></pre></div>
 <p>Next, we use the metacore readers for each of the separate tables
 necessary for a metacore object.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ds_spec2 <span class="ot">&lt;-</span> <span class="fu">xml_to_ds_spec</span>(doc)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ds_vars <span class="ot">&lt;-</span> <span class="fu">xml_to_ds_vars</span>(doc)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>var_spec <span class="ot">&lt;-</span> <span class="fu">xml_to_var_spec</span>(doc)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>value_spec <span class="ot">&lt;-</span> <span class="fu">xml_to_value_spec</span>(doc)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>code_list <span class="ot">&lt;-</span> <span class="fu">xml_to_codelist</span>(doc)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>derivations <span class="ot">&lt;-</span> <span class="fu">xml_to_derivations</span>(doc)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>ds_spec2 <span class="ot">&lt;-</span> <span class="fu">xml_to_ds_spec</span>(doc)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>ds_vars <span class="ot">&lt;-</span> <span class="fu">xml_to_ds_vars</span>(doc)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>var_spec <span class="ot">&lt;-</span> <span class="fu">xml_to_var_spec</span>(doc)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>value_spec <span class="ot">&lt;-</span> <span class="fu">xml_to_value_spec</span>(doc)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>code_list <span class="ot">&lt;-</span> <span class="fu">xml_to_codelist</span>(doc)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>derivations <span class="ot">&lt;-</span> <span class="fu">xml_to_derivations</span>(doc)</span></code></pre></div>
 <p>Great! Now we’re ready to create our metacore object.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">metacore</span>(ds_spec2, ds_vars, var_spec, value_spec, derivations, code_list)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: core from the ds_vars table only contain missing values.</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; supp_flag from the ds_vars table only contain missing values.</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; common from the var_spec table only contain missing values.</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following words in value_spec$origin are not allowed: </span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     edt</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dataset from the supp table only contain missing values.</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; variable from the supp table only contain missing values.</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; idvar from the supp table only contain missing values.</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; qeval from the supp table only contain missing values.</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: The following derivations are never used:</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  MT.SUPPAE.QVAL: see value level metadata</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  MT.SUPPDM.QVAL: see value level metadata</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: The following codelist(s) are never used:</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DRUG DICTIONARY</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  MEDICAL HISTORY DICTIONARY</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Metadata successfully imported</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">metacore</span>(ds_spec2, ds_vars, var_spec, value_spec, derivations, code_list)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt; Warning: core from the ds_vars table only contain missing values.</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; supp_flag from the ds_vars table only contain missing values.</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; common from the var_spec table only contain missing values.</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; The following words in value_spec$origin are not allowed: </span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt;     edt</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; dataset from the supp table only contain missing values.</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; variable from the supp table only contain missing values.</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt; idvar from the supp table only contain missing values.</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; qeval from the supp table only contain missing values.</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; Warning: The following derivations are never used:</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt;  MT.SUPPAE.QVAL: see value level metadata</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt;  MT.SUPPDM.QVAL: see value level metadata</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt; Warning: The following codelist(s) are never used:</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt;  DRUG DICTIONARY</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co">#&gt;  MEDICAL HISTORY DICTIONARY</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="co">#&gt;  Metadata successfully imported</span></span></code></pre></div>
 <p>Something to note about a metacore object is that it inherently holds
 all data from your source of metadata, be it your specification,
 define.xml, database, etc. So that means you have <em>all</em> the
@@ -400,37 +400,37 @@ metadata. In your program, it’s likely that you’ll just want to keep
 metadata relevant to the dataset you’re currently programming. We’ve
 made process easily, with functions that filter metadata down to
 information only relevant to a specific dataset.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a metacore object with all your dataframes</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>subset <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">select_dataset</span>(<span class="st">&quot;DM&quot;</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>subset<span class="sc">$</span>ds_spec</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 3</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   dataset structure              label       </span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;                  &lt;chr&gt;       </span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 DM      One record per subject Demographics</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># a simplified dataframe </span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>subset_t <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">select_dataset</span>(<span class="st">&quot;DM&quot;</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># a metacore object with all your dataframes</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>subset <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">select_dataset</span>(<span class="st">&quot;DM&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>subset<span class="sc">$</span>ds_spec</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 3</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt;   dataset structure              label       </span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;                  &lt;chr&gt;       </span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; 1 DM      One record per subject Demographics</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co"># a simplified dataframe </span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>subset_t <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">select_dataset</span>(<span class="st">&quot;DM&quot;</span>, <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>As can be seen above, the metacore object can be filtered directly,
 or by using the <code>simplify = TRUE</code> argument, a simplified data
 frame can be returned.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>subset_t</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 25 × 22</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    dataset variable key_seq order keep  core  supp_f…¹ type  length label format</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;      &lt;int&gt; &lt;int&gt; &lt;lgl&gt; &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt;  &lt;int&gt; &lt;chr&gt; &lt;chr&gt; </span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 DM      STUDYID        1     1 TRUE  &lt;NA&gt;  NA       text      12 Stud… &lt;NA&gt;  </span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 DM      DOMAIN        NA     2 TRUE  &lt;NA&gt;  NA       text       2 Doma… &lt;NA&gt;  </span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 DM      USUBJID        2     3 TRUE  &lt;NA&gt;  NA       text      11 Uniq… &lt;NA&gt;  </span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 DM      SUBJID        NA     4 TRUE  &lt;NA&gt;  NA       text       4 Subj… &lt;NA&gt;  </span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 DM      RFSTDTC       NA     5 FALSE &lt;NA&gt;  NA       date      10 Subj… &lt;NA&gt;  </span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 DM      RFENDTC       NA     6 FALSE &lt;NA&gt;  NA       date      10 Subj… &lt;NA&gt;  </span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 DM      RFXSTDTC      NA     7 FALSE &lt;NA&gt;  NA       date…     20 Date… &lt;NA&gt;  </span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 DM      RFXENDTC      NA     8 FALSE &lt;NA&gt;  NA       date…     20 Date… &lt;NA&gt;  </span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 DM      RFICDTC       NA     9 FALSE &lt;NA&gt;  NA       date…     20 Date… &lt;NA&gt;  </span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 DM      RFPENDTC      NA    10 FALSE &lt;NA&gt;  NA       date…     20 Date… &lt;NA&gt;  </span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 15 more rows, 11 more variables: common &lt;lgl&gt;, code_id &lt;chr&gt;,</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   derivation_id &lt;chr&gt;, origin &lt;chr&gt;, where &lt;chr&gt;, sig_dig &lt;int&gt;,</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   derivation &lt;chr&gt;, name &lt;chr&gt;, codes &lt;list&gt;, idvar &lt;chr&gt;, qeval &lt;chr&gt;, and</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   abbreviated variable name ¹​supp_flag</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>subset_t</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; # A tibble: 25 × 21</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt;    dataset variable key_seq order keep  core  supp_flag type     length label   </span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;      &lt;int&gt; &lt;int&gt; &lt;lgl&gt; &lt;chr&gt; &lt;lgl&gt;     &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;   </span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt;  1 DM      STUDYID        1     1 TRUE  &lt;NA&gt;  NA        text         12 Study I…</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt;  2 DM      DOMAIN        NA     2 TRUE  &lt;NA&gt;  NA        text          2 Domain …</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt;  3 DM      USUBJID        2     3 TRUE  &lt;NA&gt;  NA        text         11 Unique …</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;  4 DM      SUBJID        NA     4 TRUE  &lt;NA&gt;  NA        text          4 Subject…</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt;  5 DM      RFSTDTC       NA     5 FALSE &lt;NA&gt;  NA        date         10 Subject…</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt;  6 DM      RFENDTC       NA     6 FALSE &lt;NA&gt;  NA        date         10 Subject…</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt;  7 DM      RFXSTDTC      NA     7 FALSE &lt;NA&gt;  NA        datetime     20 Date/Ti…</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt;  8 DM      RFXENDTC      NA     8 FALSE &lt;NA&gt;  NA        datetime     20 Date/Ti…</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt;  9 DM      RFICDTC       NA     9 FALSE &lt;NA&gt;  NA        datetime     20 Date/Ti…</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; 10 DM      RFPENDTC      NA    10 FALSE &lt;NA&gt;  NA        datetime     20 Date/Ti…</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; # ℹ 15 more rows</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; # ℹ 11 more variables: format &lt;chr&gt;, common &lt;lgl&gt;, code_id &lt;chr&gt;,</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; #   derivation_id &lt;chr&gt;, origin &lt;chr&gt;, where &lt;chr&gt;, sig_dig &lt;int&gt;,</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt; #   derivation &lt;chr&gt;, codes &lt;list&gt;, idvar &lt;chr&gt;, qeval &lt;chr&gt;</span></span></code></pre></div>
 
 
 

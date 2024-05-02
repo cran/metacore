@@ -340,27 +340,27 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metacore)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Attaching package: &#39;dplyr&#39;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from &#39;package:stats&#39;:</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     filter, lag</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from &#39;package:base&#39;:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(metacore)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#&gt; Attaching package: &#39;dplyr&#39;</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from &#39;package:stats&#39;:</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#&gt;     filter, lag</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from &#39;package:base&#39;:</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code></pre></div>
 <p>The first thing to do when trying to build a specification reader is
 to try the default. By default metacore can read in specifications that
 are in the Pinnacle 21 specification format. If your document isn’t in
 that format, it is still worth trying the default readers, as the error
 messages can be helpful.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spec_to_metacore</span>(<span class="fu">metacore_example</span>(<span class="st">&quot;mock_spec.xlsx&quot;</span>))</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: Unable to rename the following columns in Domains:</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  label matches 2 columns</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Please check your regular expression</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">spec_to_metacore</span>(<span class="fu">metacore_example</span>(<span class="st">&quot;mock_spec.xlsx&quot;</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co">#&gt; Error: Unable to rename the following columns in Domains:</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt;  label matches 2 columns</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; Please check your regular expression</span></span></code></pre></div>
 <p>As we can see, the mock spec we are using here doesn’t match the
 format. Therefore we will have to build a bespoke reader. Before we
 start, it is important to understand the structure of the metacore
@@ -395,8 +395,8 @@ have. At the moment we support a specification where each tab contains
 information relevant to a different table, such as a domain tab, a
 variable tab, etc. To test this you can use the <code>spec_type</code>
 function.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>metacore<span class="sc">:::</span><span class="fu">spec_type</span>(<span class="fu">metacore_example</span>(<span class="st">&quot;mock_spec.xlsx&quot;</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;by_type&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>metacore<span class="sc">:::</span><span class="fu">spec_type</span>(<span class="fu">metacore_example</span>(<span class="st">&quot;mock_spec.xlsx&quot;</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;by_type&quot;</span></span></code></pre></div>
 <p>Given we have the type style of specification, we can attempt to run
 with the lower level built-in specification to metacore build. There are
 6 lower level specification builders to match each of the 6 datasets
@@ -411,69 +411,67 @@ specification has 5 tabs, domain, variables, value level metadata,
 controlled terms, and computational method. So it looks like we might
 need to split the information in these tabs to get the 6 tables needed
 for the metacore object.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>doc <span class="ot">&lt;-</span> <span class="fu">read_all_sheets</span>(<span class="fu">metacore_example</span>(<span class="st">&quot;mock_spec.xlsx&quot;</span>))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>doc <span class="sc">%&gt;%</span> <span class="fu">map</span>(head)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $Domains</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 10</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Domain Na…¹ Label Repea…² Is Re…³ Class Source Data …⁴ Key V…⁵ Descr…⁶ Docum…⁷</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  </span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 ADDS        Disp… Y       N       BDS   DS     One re… USUBJI… Contai… &lt;NA&gt;   </span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 ADRACE      Race… Y       N       OTHER DM, S… One re… USUBJI… &lt;NA&gt;    &lt;NA&gt;   </span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 ADTRT       Trea… Y       N       OTHER ADSL   One re… USUBJI… To be … &lt;NA&gt;   </span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 ADSL        Subj… N       N       ADSL  &lt;NA&gt;   One re… USUBJI… &lt;NA&gt;    &lt;NA&gt;   </span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with abbreviated variable names ¹​`Domain Name`, ²​Repeating,</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ³​`Is Reference?`, ⁴​`Data Structure`, ⁵​`Key Variables`, ⁶​Description,</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ⁷​Documentation</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $Variables</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 18</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Domain N…¹ Thera…² Indic…³ Varia…⁴ Label Type  Max L…⁵ Varia…⁶ Manda…⁷ Signf…⁸</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  </span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 ADAE       CORE    CORE    STUDYID Stud… Text  9       10      Y       &lt;NA&gt;   </span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 ADAE       CORE    CORE    USUBJID Uniq… Text  30      20      Y       &lt;NA&gt;   </span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 ADAE       CORE    CORE    SUBJID  Subj… Text  20      25      &lt;NA&gt;    &lt;NA&gt;   </span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 ADAE       CORE    CORE    SITEID  Stud… Text  10      30      &lt;NA&gt;    &lt;NA&gt;   </span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 ADAE       CORE    CORE    AGE     Age   Inte… 8       40      &lt;NA&gt;    &lt;NA&gt;   </span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 ADAE       CORE    CORE    SEX     Sex   Text  1       50      &lt;NA&gt;    &lt;NA&gt;   </span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 8 more variables: `Sort Order` &lt;chr&gt;, Required &lt;chr&gt;, Origin &lt;chr&gt;,</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `Value Level Metadata` &lt;chr&gt;, `Controlled Term or Format` &lt;chr&gt;,</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `Computational Method` &lt;chr&gt;, `Definition / Comments` &lt;chr&gt;,</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `Additional Information` &lt;chr&gt;, and abbreviated variable names</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ¹​`Domain Name`, ²​`Therapeutic Area`, ³​Indication, ⁴​`Variable Name`,</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ⁵​`Max Length`, ⁶​`Variable Order`, ⁷​Mandatory, ⁸​`Signficant Digits`</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $Value_level_Metadata</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 0 × 13</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 13 variables: VLM Name &lt;chr&gt;, Therapeutic Area &lt;chr&gt;,</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Indication &lt;chr&gt;, Parameter Code &lt;chr&gt;, Parameter &lt;chr&gt;, Type &lt;chr&gt;,</span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Max Length &lt;chr&gt;, Signficant Digits &lt;chr&gt;, Origin &lt;chr&gt;,</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Controlled Term &lt;chr&gt;, Computational Method &lt;chr&gt;, Mandatory &lt;chr&gt;,</span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   Definition/Comments &lt;chr&gt;</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $Controlled_Terms</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 8</span></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   `Codelist Name` `Codelist Code` Coded V…¹ Descr…² Code …³ Exten…⁴ Rank  Source</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; </span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 SEX             SEX             F         Female  &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;  GSK   </span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 SEX             SEX             M         Male    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;  GSK   </span></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 SEX             SEX             U         Unknown &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;  GSK   </span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 RACE            RACE            BLACK OR… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;  GSK   </span></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 RACE            RACE            AMERICAN… &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;  GSK   </span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 RACE            RACE            ASIAN     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;  GSK   </span></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with abbreviated variable names ¹​`Coded Value`,</span></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ²​`Description / Decoded Value`, ³​`Code Info`, ⁴​`Extension?`</span></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $Computational_Method</span></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 3</span></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   `Computational Method Name` `Definition / Comments`                    Addit…¹</span></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                       &lt;chr&gt;                                      &lt;chr&gt;  </span></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 TRTP                        Compare ADT/ASTDT to the series of ADSL.A… &lt;NA&gt;   </span></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 TRTA                        Compare ADT/ASTDT to the series of ADSL.A… &lt;NA&gt;   </span></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 TPERIOD                     Latest value of APERIOD from ADTRT where … &lt;NA&gt;   </span></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 TPERADY                     Contains the number of days from the firs… &lt;NA&gt;   </span></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 TPERSTDY                    Contains the number of days from the firs… &lt;NA&gt;   </span></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 TPERENDY                    Contains the number of days from the firs… &lt;NA&gt;   </span></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with abbreviated variable name ¹​`Additional Information`</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>doc <span class="ot">&lt;-</span> <span class="fu">read_all_sheets</span>(<span class="fu">metacore_example</span>(<span class="st">&quot;mock_spec.xlsx&quot;</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>doc <span class="sc">%&gt;%</span> <span class="fu">map</span>(head)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; $Domains</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 10</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt;   `Domain Name` Label    Repeating `Is Reference?` Class Source `Data Structure`</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;           </span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; 1 ADDS          Disposi… Y         N               BDS   DS     One record per …</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; 2 ADRACE        Race An… Y         N               OTHER DM, S… One record per …</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; 3 ADTRT         Treatme… Y         N               OTHER ADSL   One record per …</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; 4 ADSL          Subject… N         N               ADSL  &lt;NA&gt;   One record per …</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; # ℹ 3 more variables: `Key Variables` &lt;chr&gt;, Description &lt;chr&gt;,</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; #   Documentation &lt;chr&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; $Variables</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 18</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt;   `Domain Name` `Therapeutic Area` Indication `Variable Name` Label        Type </span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;        &lt;chr&gt;</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; 1 ADAE          CORE               CORE       STUDYID         Study Ident… Text </span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; 2 ADAE          CORE               CORE       USUBJID         Unique Subj… Text </span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt; 3 ADAE          CORE               CORE       SUBJID          Subject Ide… Text </span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt; 4 ADAE          CORE               CORE       SITEID          Study Site … Text </span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt; 5 ADAE          CORE               CORE       AGE             Age          Inte…</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt; 6 ADAE          CORE               CORE       SEX             Sex          Text </span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co">#&gt; # ℹ 12 more variables: `Max Length` &lt;chr&gt;, `Variable Order` &lt;chr&gt;,</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co">#&gt; #   Mandatory &lt;chr&gt;, `Signficant Digits` &lt;chr&gt;, `Sort Order` &lt;chr&gt;,</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="co">#&gt; #   Required &lt;chr&gt;, Origin &lt;chr&gt;, `Value Level Metadata` &lt;chr&gt;,</span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="co">#&gt; #   `Controlled Term or Format` &lt;chr&gt;, `Computational Method` &lt;chr&gt;,</span></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="co">#&gt; #   `Definition / Comments` &lt;chr&gt;, `Additional Information` &lt;chr&gt;</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="co">#&gt; $Value_level_Metadata</span></span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="co">#&gt; # A tibble: 0 × 13</span></span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="co">#&gt; # ℹ 13 variables: VLM Name &lt;chr&gt;, Therapeutic Area &lt;chr&gt;, Indication &lt;chr&gt;,</span></span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="co">#&gt; #   Parameter Code &lt;chr&gt;, Parameter &lt;chr&gt;, Type &lt;chr&gt;, Max Length &lt;chr&gt;,</span></span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a><span class="co">#&gt; #   Signficant Digits &lt;chr&gt;, Origin &lt;chr&gt;, Controlled Term &lt;chr&gt;,</span></span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="co">#&gt; #   Computational Method &lt;chr&gt;, Mandatory &lt;chr&gt;, Definition/Comments &lt;chr&gt;</span></span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="co">#&gt; $Controlled_Terms</span></span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 8</span></span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a><span class="co">#&gt;   `Codelist Name` `Codelist Code` `Coded Value`           Description / Decode…¹</span></span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;                   &lt;chr&gt;                 </span></span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a><span class="co">#&gt; 1 SEX             SEX             F                       Female                </span></span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="co">#&gt; 2 SEX             SEX             M                       Male                  </span></span>
+<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a><span class="co">#&gt; 3 SEX             SEX             U                       Unknown               </span></span>
+<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="co">#&gt; 4 RACE            RACE            BLACK OR AFRICAN AMERI… &lt;NA&gt;                  </span></span>
+<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a><span class="co">#&gt; 5 RACE            RACE            AMERICAN INDIAN OR ALA… &lt;NA&gt;                  </span></span>
+<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="co">#&gt; 6 RACE            RACE            ASIAN                   &lt;NA&gt;                  </span></span>
+<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a><span class="co">#&gt; # ℹ abbreviated name: ¹​`Description / Decoded Value`</span></span>
+<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="co">#&gt; # ℹ 4 more variables: `Code Info` &lt;chr&gt;, `Extension?` &lt;chr&gt;, Rank &lt;chr&gt;,</span></span>
+<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a><span class="co">#&gt; #   Source &lt;chr&gt;</span></span>
+<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a><span class="co">#&gt; $Computational_Method</span></span>
+<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 3</span></span>
+<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a><span class="co">#&gt;   `Computational Method Name` `Definition / Comments`     Additional Informati…¹</span></span>
+<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                       &lt;chr&gt;                       &lt;chr&gt;                 </span></span>
+<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a><span class="co">#&gt; 1 TRTP                        Compare ADT/ASTDT to the s… &lt;NA&gt;                  </span></span>
+<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a><span class="co">#&gt; 2 TRTA                        Compare ADT/ASTDT to the s… &lt;NA&gt;                  </span></span>
+<span id="cb4-57"><a href="#cb4-57" tabindex="-1"></a><span class="co">#&gt; 3 TPERIOD                     Latest value of APERIOD fr… &lt;NA&gt;                  </span></span>
+<span id="cb4-58"><a href="#cb4-58" tabindex="-1"></a><span class="co">#&gt; 4 TPERADY                     Contains the number of day… &lt;NA&gt;                  </span></span>
+<span id="cb4-59"><a href="#cb4-59" tabindex="-1"></a><span class="co">#&gt; 5 TPERSTDY                    Contains the number of day… &lt;NA&gt;                  </span></span>
+<span id="cb4-60"><a href="#cb4-60" tabindex="-1"></a><span class="co">#&gt; 6 TPERENDY                    Contains the number of day… &lt;NA&gt;                  </span></span>
+<span id="cb4-61"><a href="#cb4-61" tabindex="-1"></a><span class="co">#&gt; # ℹ abbreviated name: ¹​`Additional Information`</span></span></code></pre></div>
 <p>Let’s start with making the ds_spec (dataset specification) table
 using <code>spec_type_to_ds_spec</code>. The ds_spec table is made of 3
 columns: the dataset name, the dataset structure, and the dataset label.
@@ -485,18 +483,18 @@ function.</p>
 vector of columns (cols) and a sheet name (sheet). But, only doc is
 needed, the other inputs have defaults. So we can try with just the
 default and see what we get.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spec_type_to_ds_spec</span>(doc)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: Unable to rename the following columns in Domains:</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  label matches 2 columns</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Please check your regular expression</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">spec_type_to_ds_spec</span>(doc)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; Error: Unable to rename the following columns in Domains:</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt;  label matches 2 columns</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; Please check your regular expression</span></span></code></pre></div>
 <p>The error tells us there is an issue with the label column in the
 Domains table. Meaning, we need to change the default vector for the
 cols input because the default regular expression isn’t specific enough.
 First, let’s check the column names in the Domain tab</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>doc<span class="sc">$</span>Domains <span class="sc">%&gt;%</span> <span class="fu">names</span>()</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;Domain Name&quot;    &quot;Label&quot;          &quot;Repeating&quot;      &quot;Is Reference?&quot; </span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [5] &quot;Class&quot;          &quot;Source&quot;         &quot;Data Structure&quot; &quot;Key Variables&quot; </span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [9] &quot;Description&quot;    &quot;Documentation&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>doc<span class="sc">$</span>Domains <span class="sc">%&gt;%</span> <span class="fu">names</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt;  [1] &quot;Domain Name&quot;    &quot;Label&quot;          &quot;Repeating&quot;      &quot;Is Reference?&quot; </span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt;  [5] &quot;Class&quot;          &quot;Source&quot;         &quot;Data Structure&quot; &quot;Key Variables&quot; </span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt;  [9] &quot;Description&quot;    &quot;Documentation&quot;</span></span></code></pre></div>
 <p>If we look at the default input for cols,
 <code>&quot;label&quot; = &quot;[L|l]abel|[D|d]escription&quot;</code>, we can see the label
 is matching to the <code>Label</code> and the <code>Description</code>
@@ -504,18 +502,18 @@ columns .</p>
 <p>We only need the Domain <code>Name</code>, <code>Label</code>, and
 <code>Data Structure</code> columns. So we can update the expressions to
 be more specific.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ds_spec <span class="ot">&lt;-</span> <span class="fu">spec_type_to_ds_spec</span>(doc, </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="st">&quot;Name&quot;</span>, </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;structure&quot;</span> <span class="ot">=</span> <span class="st">&quot;Data Structure&quot;</span>,  </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;label&quot;</span> <span class="ot">=</span> <span class="st">&quot;Label&quot;</span>))</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ds_spec)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 3</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   dataset structure                                                    label    </span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;                                                        &lt;chr&gt;    </span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 ADDS    One record per subject per datetime per parameter per result Disposit…</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 ADRACE  One record per subject per analysis sequence number          Race Ana…</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 ADTRT   One record per subject per period                            Treatmen…</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 ADSL    One record per subject                                       Subject-…</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>ds_spec <span class="ot">&lt;-</span> <span class="fu">spec_type_to_ds_spec</span>(doc, </span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>                                <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="st">&quot;Name&quot;</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>                                         <span class="st">&quot;structure&quot;</span> <span class="ot">=</span> <span class="st">&quot;Data Structure&quot;</span>,  </span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>                                         <span class="st">&quot;label&quot;</span> <span class="ot">=</span> <span class="st">&quot;Label&quot;</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="fu">head</span>(ds_spec)</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 3</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt;   dataset structure                                                    label    </span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;                                                        &lt;chr&gt;    </span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt; 1 ADDS    One record per subject per datetime per parameter per result Disposit…</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt; 2 ADRACE  One record per subject per analysis sequence number          Race Ana…</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; 3 ADTRT   One record per subject per period                            Treatmen…</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; 4 ADSL    One record per subject                                       Subject-…</span></span></code></pre></div>
 <p>Regular expressions are used to match the columns, so if you needed a
 more flexible input, you could do that. Now, we have the ds_spec table
 we can move on to the ds_vars table.</p>
@@ -540,11 +538,11 @@ labeled “Variable” (this is because all the settings are defaulted to
 read in P21 formatted specs). But, those default work for our
 specifications cause all the information is in the variable tab; so we
 can try with just the defaults again.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spec_type_to_ds_vars</span>(doc)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: Unable to rename the following columns in Variables:</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  variable matches 2 columns</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  order matches 2 columns</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Please check your regular expression</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">spec_type_to_ds_vars</span>(doc)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#&gt; Error: Unable to rename the following columns in Variables:</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt;  variable matches 2 columns</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt;  order matches 2 columns</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; Please check your regular expression</span></span></code></pre></div>
 <p>This error means it is trying to match the sheet entitled Variable,
 the variable column matches to two different columns. This is the same
 error we had before. We just need to have a quick look at the columns
@@ -554,41 +552,40 @@ information above in the domain tab. So we will need to do two things to
 fix this. First, adjust the dataset name in the
 <code>key_seq_cols</code> argument. Second, change the sheets to include
 the variable and the domain sheet.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>doc<span class="sc">$</span>Variables <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 18</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Domain N…¹ Thera…² Indic…³ Varia…⁴ Label Type  Max L…⁵ Varia…⁶ Manda…⁷ Signf…⁸</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  </span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 ADAE       CORE    CORE    STUDYID Stud… Text  9       10      Y       &lt;NA&gt;   </span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 ADAE       CORE    CORE    USUBJID Uniq… Text  30      20      Y       &lt;NA&gt;   </span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 ADAE       CORE    CORE    SUBJID  Subj… Text  20      25      &lt;NA&gt;    &lt;NA&gt;   </span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 ADAE       CORE    CORE    SITEID  Stud… Text  10      30      &lt;NA&gt;    &lt;NA&gt;   </span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 ADAE       CORE    CORE    AGE     Age   Inte… 8       40      &lt;NA&gt;    &lt;NA&gt;   </span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 ADAE       CORE    CORE    SEX     Sex   Text  1       50      &lt;NA&gt;    &lt;NA&gt;   </span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 8 more variables: `Sort Order` &lt;chr&gt;, Required &lt;chr&gt;, Origin &lt;chr&gt;,</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `Value Level Metadata` &lt;chr&gt;, `Controlled Term or Format` &lt;chr&gt;,</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `Computational Method` &lt;chr&gt;, `Definition / Comments` &lt;chr&gt;,</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   `Additional Information` &lt;chr&gt;, and abbreviated variable names</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ¹​`Domain Name`, ²​`Therapeutic Area`, ³​Indication, ⁴​`Variable Name`,</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ⁵​`Max Length`, ⁶​`Variable Order`, ⁷​Mandatory, ⁸​`Signficant Digits`</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>ds_vars<span class="ot">&lt;-</span> <span class="fu">spec_type_to_ds_vars</span>(doc, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="st">&quot;Domain&quot;</span>,</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;variable&quot;</span> <span class="ot">=</span> <span class="st">&quot;[V|v]ariable [N|n]ame&quot;</span>,</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;order&quot;</span> <span class="ot">=</span> <span class="st">&quot;[V|v]ariable [O|o]rder&quot;</span>,</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;keep&quot;</span> <span class="ot">=</span> <span class="st">&quot;[M|m]andatory&quot;</span>),</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>                               <span class="at">key_seq_cols =</span> <span class="fu">c</span>(<span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="st">&quot;Domain Name&quot;</span>,</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;key_seq&quot;</span> <span class="ot">=</span> <span class="st">&quot;Key&quot;</span>),</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>                               <span class="at">sheet =</span> <span class="st">&quot;[V|v]ar|Domains&quot;</span>) </span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ds_vars)</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 7</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   dataset variable order keep  key_seq core  supp_flag</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;lgl&gt;   &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;    </span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 ADAE    STUDYID     10 TRUE       NA &lt;NA&gt;  NA       </span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 ADAE    USUBJID     20 TRUE       NA &lt;NA&gt;  NA       </span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 ADAE    SUBJID      25 NA         NA &lt;NA&gt;  NA       </span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 ADAE    SITEID      30 NA         NA &lt;NA&gt;  NA       </span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 ADAE    AGE         40 NA         NA &lt;NA&gt;  NA       </span></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 ADAE    SEX         50 NA         NA &lt;NA&gt;  NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>doc<span class="sc">$</span>Variables <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 18</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">#&gt;   `Domain Name` `Therapeutic Area` Indication `Variable Name` Label        Type </span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;        &lt;chr&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#&gt; 1 ADAE          CORE               CORE       STUDYID         Study Ident… Text </span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#&gt; 2 ADAE          CORE               CORE       USUBJID         Unique Subj… Text </span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#&gt; 3 ADAE          CORE               CORE       SUBJID          Subject Ide… Text </span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#&gt; 4 ADAE          CORE               CORE       SITEID          Study Site … Text </span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt; 5 ADAE          CORE               CORE       AGE             Age          Inte…</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#&gt; 6 ADAE          CORE               CORE       SEX             Sex          Text </span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt; # ℹ 12 more variables: `Max Length` &lt;chr&gt;, `Variable Order` &lt;chr&gt;,</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">#&gt; #   Mandatory &lt;chr&gt;, `Signficant Digits` &lt;chr&gt;, `Sort Order` &lt;chr&gt;,</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">#&gt; #   Required &lt;chr&gt;, Origin &lt;chr&gt;, `Value Level Metadata` &lt;chr&gt;,</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="co">#&gt; #   `Controlled Term or Format` &lt;chr&gt;, `Computational Method` &lt;chr&gt;,</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="co">#&gt; #   `Definition / Comments` &lt;chr&gt;, `Additional Information` &lt;chr&gt;</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>ds_vars<span class="ot">&lt;-</span> <span class="fu">spec_type_to_ds_vars</span>(doc, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="st">&quot;Domain&quot;</span>,</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>                                             <span class="st">&quot;variable&quot;</span> <span class="ot">=</span> <span class="st">&quot;[V|v]ariable [N|n]ame&quot;</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>                                             <span class="st">&quot;order&quot;</span> <span class="ot">=</span> <span class="st">&quot;[V|v]ariable [O|o]rder&quot;</span>,</span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>                                             <span class="st">&quot;keep&quot;</span> <span class="ot">=</span> <span class="st">&quot;[M|m]andatory&quot;</span>),</span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>                               <span class="at">key_seq_cols =</span> <span class="fu">c</span>(<span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="st">&quot;Domain Name&quot;</span>,</span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>                                                <span class="st">&quot;key_seq&quot;</span> <span class="ot">=</span> <span class="st">&quot;Key&quot;</span>),</span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>                               <span class="at">sheet =</span> <span class="st">&quot;[V|v]ar|Domains&quot;</span>) </span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a><span class="fu">head</span>(ds_vars)</span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 7</span></span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a><span class="co">#&gt;   dataset variable order keep  key_seq core  supp_flag</span></span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;lgl&gt;   &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;    </span></span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a><span class="co">#&gt; 1 ADAE    STUDYID     10 TRUE       NA &lt;NA&gt;  NA       </span></span>
+<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a><span class="co">#&gt; 2 ADAE    USUBJID     20 TRUE       NA &lt;NA&gt;  NA       </span></span>
+<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a><span class="co">#&gt; 3 ADAE    SUBJID      25 NA         NA &lt;NA&gt;  NA       </span></span>
+<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a><span class="co">#&gt; 4 ADAE    SITEID      30 NA         NA &lt;NA&gt;  NA       </span></span>
+<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a><span class="co">#&gt; 5 ADAE    AGE         40 NA         NA &lt;NA&gt;  NA       </span></span>
+<span id="cb9-34"><a href="#cb9-34" tabindex="-1"></a><span class="co">#&gt; 6 ADAE    SEX         50 NA         NA &lt;NA&gt;  NA</span></span></code></pre></div>
 <p>The next table we have is var_spec, the table of variable level
 metadata. var_spec is separate from ds_vars because, in accordance with
 CDISC standards, labels and lengths should be the same for a given
@@ -616,30 +613,30 @@ automatically deal with is the common variable. If given a dataset
 column, the builder function will automatically figure out which
 variables are common to all dataset. This is good because we don’t have
 a common variable in our specs.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>var_spec <span class="ot">&lt;-</span> <span class="fu">spec_type_to_var_spec</span>(doc, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;variable&quot;</span> <span class="ot">=</span> <span class="st">&quot;Variable Name&quot;</span>,</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;length&quot;</span> <span class="ot">=</span> <span class="st">&quot;[L|l]ength&quot;</span>,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;label&quot;</span> <span class="ot">=</span> <span class="st">&quot;[L|l]abel&quot;</span>,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;type&quot;</span> <span class="ot">=</span> <span class="st">&quot;[T|t]ype&quot;</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="st">&quot;[D|d]ataset|[D|d]omain&quot;</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                                                <span class="st">&quot;format&quot;</span> <span class="ot">=</span> <span class="st">&quot;Format&quot;</span>))</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(var_spec)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 6</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   variable length label                            type    format common</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                            &lt;chr&gt;   &lt;chr&gt;  &lt;lgl&gt; </span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 STUDYID       9 Study Identifier                 Text    &lt;NA&gt;   TRUE  </span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 USUBJID      30 Unique Subject Identifier        Text    &lt;NA&gt;   TRUE  </span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 SUBJID       20 Subject Identifier for the Study Text    &lt;NA&gt;   FALSE </span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 SITEID       10 Study Site Identifier            Text    &lt;NA&gt;   TRUE  </span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 AGE           8 Age                              Integer &lt;NA&gt;   TRUE  </span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 SEX           1 Sex                              Text    SEX    TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>var_spec <span class="ot">&lt;-</span> <span class="fu">spec_type_to_var_spec</span>(doc, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;variable&quot;</span> <span class="ot">=</span> <span class="st">&quot;Variable Name&quot;</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>                                                <span class="st">&quot;length&quot;</span> <span class="ot">=</span> <span class="st">&quot;[L|l]ength&quot;</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>                                                <span class="st">&quot;label&quot;</span> <span class="ot">=</span> <span class="st">&quot;[L|l]abel&quot;</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>                                                <span class="st">&quot;type&quot;</span> <span class="ot">=</span> <span class="st">&quot;[T|t]ype&quot;</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>                                                <span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="st">&quot;[D|d]ataset|[D|d]omain&quot;</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>                                                <span class="st">&quot;format&quot;</span> <span class="ot">=</span> <span class="st">&quot;Format&quot;</span>))</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="fu">head</span>(var_spec)</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 6</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co">#&gt;   variable length label                            type    format common</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                            &lt;chr&gt;   &lt;chr&gt;  &lt;lgl&gt; </span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="co">#&gt; 1 STUDYID       9 Study Identifier                 Text    &lt;NA&gt;   TRUE  </span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="co">#&gt; 2 USUBJID      30 Unique Subject Identifier        Text    &lt;NA&gt;   TRUE  </span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="co">#&gt; 3 SUBJID       20 Subject Identifier for the Study Text    &lt;NA&gt;   FALSE </span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co">#&gt; 4 SITEID       10 Study Site Identifier            Text    &lt;NA&gt;   TRUE  </span></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">#&gt; 5 AGE           8 Age                              Integer &lt;NA&gt;   TRUE  </span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co">#&gt; 6 SEX           1 Sex                              Text    SEX    TRUE</span></span></code></pre></div>
 <p>There is one issue here: the format column is also the codelist
 names. This is because the information came from the “Controlled Term or
 Format” column of my spec document. So the final step of preparing
 var_spec table is to remove the controlled terms. It is easy here
 because all the formats end in a full stop (.), but the controlled terms
 don’t.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>var_spec <span class="ot">&lt;-</span> var_spec <span class="sc">%&gt;%</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">format =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(format, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>), format, <span class="st">&quot;&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>var_spec <span class="ot">&lt;-</span> var_spec <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">format =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(format, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>), format, <span class="st">&quot;&quot;</span>))</span></code></pre></div>
 <p>The next dataset is value_spec, which contains the value level
 metadata. It is made up of 8 columns:</p>
 <ul>
@@ -659,47 +656,47 @@ any value level metadata in our spec. But, that is fine - the default
 builders will just pull what information it can from the variable tab.
 Additionally this spec doesn’t have a predecessor column, so we can just
 use the method column.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>value_spec <span class="ot">&lt;-</span> <span class="fu">spec_type_to_value_spec</span>(doc, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="st">&quot;VLM Name|Domain&quot;</span>,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">&quot;variable&quot;</span> <span class="ot">=</span> <span class="st">&quot;VLM Name|Variable Name&quot;</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">&quot;origin&quot;</span> <span class="ot">=</span> <span class="st">&quot;[O|o]rigin&quot;</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">&quot;type&quot;</span> <span class="ot">=</span> <span class="st">&quot;[T|t]ype&quot;</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">&quot;code_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;Controlled Term&quot;</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">&quot;where&quot;</span> <span class="ot">=</span> <span class="st">&quot;Parameter Code&quot;</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">&quot;derivation_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;Method&quot;</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">&quot;predecessor&quot;</span> <span class="ot">=</span> <span class="st">&quot;Method&quot;</span>),</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">where_sep_sheet =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(value_spec)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 8</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   dataset variable origin      type    code_id derivation_id where sig_dig</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;   &lt;int&gt;</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 ADAE    STUDYID  Predecessor Text    &lt;NA&gt;    &lt;NA&gt;          TRUE       NA</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 ADAE    USUBJID  Predecessor Text    &lt;NA&gt;    &lt;NA&gt;          TRUE       NA</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 ADAE    SUBJID   Predecessor Text    &lt;NA&gt;    &lt;NA&gt;          TRUE       NA</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 ADAE    SITEID   Predecessor Text    &lt;NA&gt;    &lt;NA&gt;          TRUE       NA</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 ADAE    AGE      Predecessor Integer &lt;NA&gt;    &lt;NA&gt;          TRUE       NA</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 ADAE    SEX      Predecessor Text    SEX     &lt;NA&gt;          TRUE       NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>value_spec <span class="ot">&lt;-</span> <span class="fu">spec_type_to_value_spec</span>(doc, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="st">&quot;VLM Name|Domain&quot;</span>,</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>                                                    <span class="st">&quot;variable&quot;</span> <span class="ot">=</span> <span class="st">&quot;VLM Name|Variable Name&quot;</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>                                                    <span class="st">&quot;origin&quot;</span> <span class="ot">=</span> <span class="st">&quot;[O|o]rigin&quot;</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>                                                    <span class="st">&quot;type&quot;</span> <span class="ot">=</span> <span class="st">&quot;[T|t]ype&quot;</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>                                                    <span class="st">&quot;code_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;Controlled Term&quot;</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>                                                    <span class="st">&quot;where&quot;</span> <span class="ot">=</span> <span class="st">&quot;Parameter Code&quot;</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>                                                    <span class="st">&quot;derivation_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;Method&quot;</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>                                                    <span class="st">&quot;predecessor&quot;</span> <span class="ot">=</span> <span class="st">&quot;Method&quot;</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>                                      <span class="at">where_sep_sheet =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="fu">head</span>(value_spec)</span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 8</span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="co">#&gt;   dataset variable origin      type    code_id derivation_id where sig_dig</span></span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;   &lt;int&gt;</span></span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="co">#&gt; 1 ADAE    STUDYID  Predecessor Text    &lt;NA&gt;    pred.NA       TRUE       NA</span></span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="co">#&gt; 2 ADAE    USUBJID  Predecessor Text    &lt;NA&gt;    pred.NA       TRUE       NA</span></span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="co">#&gt; 3 ADAE    SUBJID   Predecessor Text    &lt;NA&gt;    pred.NA       TRUE       NA</span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="co">#&gt; 4 ADAE    SITEID   Predecessor Text    &lt;NA&gt;    pred.NA       TRUE       NA</span></span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="co">#&gt; 5 ADAE    AGE      Predecessor Integer &lt;NA&gt;    pred.NA       TRUE       NA</span></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="co">#&gt; 6 ADAE    SEX      Predecessor Text    SEX     pred.NA       TRUE       NA</span></span></code></pre></div>
 <p>The derivation table is relatively simple by comparison. It just has
 two columns, the derivation id and the derivation. But, the derivation
 comes from the supplied derivation, predecessor, or comment column
 depending on the origin. In this mock we don’t have a predecessor column
 so we can set to comment as well.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>derivation <span class="ot">&lt;-</span> <span class="fu">spec_type_to_derivations</span>(doc, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;derivation_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;Name&quot;</span>,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                                                     <span class="st">&quot;derivation&quot;</span> <span class="ot">=</span> <span class="st">&quot;[D|d]efinition|[D|d]escription&quot;</span>), </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">var_cols =</span> <span class="fu">c</span>(<span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="st">&quot;Domain Name&quot;</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">&quot;variable&quot;</span> <span class="ot">=</span> <span class="st">&quot;Variable Name|VLM&quot;</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">&quot;origin&quot;</span> <span class="ot">=</span> <span class="st">&quot;[O|o]rigin&quot;</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">&quot;predecessor&quot;</span> <span class="ot">=</span> <span class="st">&quot;Comment&quot;</span>,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                                                    <span class="st">&quot;comment&quot;</span> <span class="ot">=</span> <span class="st">&quot;Comment&quot;</span>)) </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(derivation)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 2</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   derivation_id derivation                                                      </span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;                                                           </span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 TRTP          Compare ADT/ASTDT to the series of ADSL.APxxSDT and ADSL.APxxED…</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 TRTA          Compare ADT/ASTDT to the series of ADSL.APxxSDT and ADSL.APxxED…</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 TPERIOD       Latest value of APERIOD from ADTRT where ADTRT.TRSDT/ADTRT.TRSD…</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 TPERADY       Contains the number of days from the first exposure date in the…</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 TPERSTDY      Contains the number of days from the first exposure date in the…</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 TPERENDY      Contains the number of days from the first exposure date in the…</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>derivation <span class="ot">&lt;-</span> <span class="fu">spec_type_to_derivations</span>(doc, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;derivation_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;Name&quot;</span>,</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>                                                     <span class="st">&quot;derivation&quot;</span> <span class="ot">=</span> <span class="st">&quot;[D|d]efinition|[D|d]escription&quot;</span>), </span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>                                       <span class="at">var_cols =</span> <span class="fu">c</span>(<span class="st">&quot;dataset&quot;</span> <span class="ot">=</span> <span class="st">&quot;Domain Name&quot;</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>                                                    <span class="st">&quot;variable&quot;</span> <span class="ot">=</span> <span class="st">&quot;Variable Name|VLM&quot;</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>                                                    <span class="st">&quot;origin&quot;</span> <span class="ot">=</span> <span class="st">&quot;[O|o]rigin&quot;</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>                                                    <span class="st">&quot;predecessor&quot;</span> <span class="ot">=</span> <span class="st">&quot;Comment&quot;</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>                                                    <span class="st">&quot;comment&quot;</span> <span class="ot">=</span> <span class="st">&quot;Comment&quot;</span>)) </span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="fu">head</span>(derivation)</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 2</span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co">#&gt;   derivation_id derivation                                                      </span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;                                                           </span></span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="co">#&gt; 1 TRTP          Compare ADT/ASTDT to the series of ADSL.APxxSDT and ADSL.APxxED…</span></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="co">#&gt; 2 TRTA          Compare ADT/ASTDT to the series of ADSL.APxxSDT and ADSL.APxxED…</span></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="co">#&gt; 3 TPERIOD       Latest value of APERIOD from ADTRT where ADTRT.TRSDT/ADTRT.TRSD…</span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="co">#&gt; 4 TPERADY       Contains the number of days from the first exposure date in the…</span></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a><span class="co">#&gt; 5 TPERSTDY      Contains the number of days from the first exposure date in the…</span></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="co">#&gt; 6 TPERENDY      Contains the number of days from the first exposure date in the…</span></span></code></pre></div>
 <p>The final table is codelist. This table contains all the code/decode
 pairs, all lists of permitted values and information about external
 libraries. What is somewhat special about the structure of this table is
@@ -712,314 +709,314 @@ and others to be character.</p>
 <p>By default the <code>spec_type_to_codelist</code> function expects
 codelists and external dictionaries. But, in the specification we only
 have codelist so <code>dict_cols</code> needs to be set to null.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>codelist <span class="ot">&lt;-</span> <span class="fu">spec_type_to_codelist</span>(doc, <span class="at">codelist_cols =</span> <span class="fu">c</span>(<span class="st">&quot;code_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;Codelist Code&quot;</span>,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&quot;name&quot;</span> <span class="ot">=</span> <span class="st">&quot;Codelist Name&quot;</span>,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&quot;code&quot;</span> <span class="ot">=</span> <span class="st">&quot;Coded Value&quot;</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&quot;decode&quot;</span> <span class="ot">=</span> <span class="st">&quot;Decoded Value&quot;</span>),</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">simplify =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">dict_cols =</span> <span class="cn">NULL</span>)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(codelist)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 4</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   code_id name    type        codes           </span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;       &lt;list&gt;          </span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 SEX     SEX     code_decode &lt;tibble [3 × 2]&gt;</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 RACE    RACE    code_decode &lt;tibble [5 × 2]&gt;</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 COUNTRY COUNTRY code_decode &lt;tibble [2 × 2]&gt;</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 NY      NY      code_decode &lt;tibble [2 × 2]&gt;</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 DATEFL  DATEFL  code_decode &lt;tibble [2 × 2]&gt;</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 AESEV   AESEV   code_decode &lt;tibble [3 × 2]&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>codelist <span class="ot">&lt;-</span> <span class="fu">spec_type_to_codelist</span>(doc, <span class="at">codelist_cols =</span> <span class="fu">c</span>(<span class="st">&quot;code_id&quot;</span> <span class="ot">=</span> <span class="st">&quot;Codelist Code&quot;</span>,</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>                                                         <span class="st">&quot;name&quot;</span> <span class="ot">=</span> <span class="st">&quot;Codelist Name&quot;</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>                                                         <span class="st">&quot;code&quot;</span> <span class="ot">=</span> <span class="st">&quot;Coded Value&quot;</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>                                                         <span class="st">&quot;decode&quot;</span> <span class="ot">=</span> <span class="st">&quot;Decoded Value&quot;</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>                                  <span class="at">simplify =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>                                  <span class="at">dict_cols =</span> <span class="cn">NULL</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="fu">head</span>(codelist)</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 4</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co">#&gt;   code_id name    type        codes           </span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;       &lt;list&gt;          </span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="co">#&gt; 1 SEX     SEX     code_decode &lt;tibble [3 × 2]&gt;</span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co">#&gt; 2 RACE    RACE    code_decode &lt;tibble [5 × 2]&gt;</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co">#&gt; 3 COUNTRY COUNTRY code_decode &lt;tibble [2 × 2]&gt;</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="co">#&gt; 4 NY      NY      code_decode &lt;tibble [2 × 2]&gt;</span></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co">#&gt; 5 DATEFL  DATEFL  code_decode &lt;tibble [2 × 2]&gt;</span></span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="co">#&gt; 6 AESEV   AESEV   code_decode &lt;tibble [3 × 2]&gt;</span></span></code></pre></div>
 <p>Now we have all the tables we need we can make the metacore
 object</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metacore</span>(ds_spec, ds_vars, var_spec, value_spec,</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>         derivation, codelist)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: core from the ds_vars table only contain missing values.</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; supp_flag from the ds_vars table only contain missing values.</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sig_dig from the value_spec table only contain missing values.</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; dataset from the supp table only contain missing values.</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; variable from the supp table only contain missing values.</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; idvar from the supp table only contain missing values.</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; qeval from the supp table only contain missing values.</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: The following variables have derivation ids not found in the derivations table:</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ASTDT</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ASTTM</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ASTDTM</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AENDT</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AENTM</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AENDTM</span></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AFTRTSTC</span></span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ALTRTSTC</span></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  APFTRSTC</span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ASTDT</span></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AFTRTST</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AFTRTSTC</span></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ALTRTST</span></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ALTRTSTC</span></span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ASTDT</span></span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ASTTM</span></span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ASTDTM</span></span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AENDT</span></span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AENTM</span></span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AENDTM</span></span>
-<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CMBASE</span></span>
-<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CMBASECD</span></span>
-<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DOSCUMA</span></span>
-<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AVISIT</span></span>
-<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ATPT</span></span>
-<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADT</span></span>
-<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ATM</span></span>
-<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADTM</span></span>
-<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  APERADY</span></span>
-<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  APERSTDY</span></span>
-<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  APERENDY</span></span>
-<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADT</span></span>
-<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ATM</span></span>
-<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADTM</span></span>
-<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADT</span></span>
-<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ATM</span></span>
-<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADTM</span></span>
-<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: The following derivations are never used:</span></span>
-<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.STUDYID: AE.STUDYID</span></span>
-<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.USUBJID: AE.USUBJID</span></span>
-<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.SUBJID: AE.SUBJID</span></span>
-<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.SITEID: ADSL.SITEID</span></span>
-<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.AGE: ADSL.AGE</span></span>
-<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.SEX: ADSL.SEX</span></span>
-<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.RACE: ADSL.RACE</span></span>
-<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.ACOUNTRY: ADSL.ACOUNTRY</span></span>
-<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.FASFL: ADSL.FASFL</span></span>
-<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.ITTFL: ADSL.ITTFL</span></span>
-<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.SAFFL: ADSL.SAFFL</span></span>
-<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.PPROTFL: ADSL.PPROTFL</span></span>
-<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRTxxPN that corresponds to the treatment selected in TRTP: ADSL.TRTxxPN that corresponds to the treatment selected in TRTP</span></span>
-<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRTxxAN that corresponds to the treatment selected in TRTA: ADSL.TRTxxAN that corresponds to the treatment selected in TRTA</span></span>
-<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRT01A: ADSL.TRT01A</span></span>
-<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRT01AN: ADSL.TRT01AN</span></span>
-<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRT01P: ADSL.TRT01P</span></span>
-<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRT01PN: ADSL.TRT01PN</span></span>
-<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRTSEQP: ADSL.TRTSEQP</span></span>
-<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRTSEQPN: ADSL.TRTSEQPN</span></span>
-<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRTSEQA: ADSL.TRTSEQA</span></span>
-<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRTSEQAN: ADSL.TRTSEQAN</span></span>
-<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESTDY: AE.AESTDY</span></span>
-<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESTDTC: AE.AESTDTC</span></span>
-<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEENDTC: AE.AEENDTC</span></span>
-<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEENDY: AE.AEENDY</span></span>
-<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESEQ: AE.AESEQ</span></span>
-<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AETERM: AE.AETERM</span></span>
-<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEMODIFY: AE.AEMODIFY</span></span>
-<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEDECOD: AE.AEDECOD</span></span>
-<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEBODSYS: AE.AEBODSYS</span></span>
-<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEBDSYCD: AE.AEBDSYCD</span></span>
-<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AELLT: AE.AELLT</span></span>
-<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AELLTCD: AE.AELLTCD</span></span>
-<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEPTCD: AE.AEPTCD</span></span>
-<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEHLT: AE.AEHLT</span></span>
-<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEHLTCD: AE.AEHLTCD</span></span>
-<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEHLGT: AE.AEHLGT</span></span>
-<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEHLGTCD: AE.AEHLGTCD</span></span>
-<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESOC: AE.AESOC</span></span>
-<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESOCCD: AE.AESOCCD</span></span>
-<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEDUR: AE.AEDUR</span></span>
-<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESEV: AE.AESEV</span></span>
-<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESEV or as per RAP: AE.AESEV or as per RAP</span></span>
-<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEACN: AE.AEACN</span></span>
-<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  SUPPAE.QVAL where SUPPAE.QNAM=&quot;ACT1&quot;: SUPPAE.QVAL where SUPPAE.QNAM=&quot;ACT1&quot;</span></span>
-<span id="cb15-101"><a href="#cb15-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  SUPPAE.QVAL where QNAM=&quot;AETRTEM&quot;: SUPPAE.QVAL where QNAM=&quot;AETRTEM&quot;</span></span>
-<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEREFID: AE.AEREFID</span></span>
-<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEACNOTH: AE.AEACNOTH</span></span>
-<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESER: AE.AESER</span></span>
-<span id="cb15-105"><a href="#cb15-105" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESCAN: AE.AESCAN</span></span>
-<span id="cb15-106"><a href="#cb15-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESCONG: AE.AESCONG</span></span>
-<span id="cb15-107"><a href="#cb15-107" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESDISAB: AE.AESDISAB</span></span>
-<span id="cb15-108"><a href="#cb15-108" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESDTH: AE.AESDTH</span></span>
-<span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESHOSP: AE.AESHOSP</span></span>
-<span id="cb15-110"><a href="#cb15-110" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESLIFE: AE.AESLIFE</span></span>
-<span id="cb15-111"><a href="#cb15-111" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESOD: AE.AESOD</span></span>
-<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AESMIE: AE.AESMIE</span></span>
-<span id="cb15-113"><a href="#cb15-113" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  SUPPAE.QVAL where QNAM=&quot;AESPROT&quot;: SUPPAE.QVAL where QNAM=&quot;AESPROT&quot;</span></span>
-<span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEOUT: AE.AEOUT</span></span>
-<span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AEREL: AE.AEREL</span></span>
-<span id="cb15-116"><a href="#cb15-116" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AE.AETOXGR: AE.AETOXGR</span></span>
-<span id="cb15-117"><a href="#cb15-117" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Numeric version of AETOXGR: Numeric version of AETOXGR</span></span>
-<span id="cb15-118"><a href="#cb15-118" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  SUPPAE.QVAL where SUPPAE.QNAM=&quot;GRADED&quot;: SUPPAE.QVAL where SUPPAE.QNAM=&quot;GRADED&quot;</span></span>
-<span id="cb15-119"><a href="#cb15-119" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  SUPPAE.QVAL where SUPPAE.QNAM=&quot;AEDLT&quot;: SUPPAE.QVAL where SUPPAE.QNAM=&quot;AEDLT&quot;</span></span>
-<span id="cb15-120"><a href="#cb15-120" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  SUPPAE.QVAL where SUPPAE.QNAM=&quot;AERDG1&quot;: SUPPAE.QVAL where SUPPAE.QNAM=&quot;AERDG1&quot;</span></span>
-<span id="cb15-121"><a href="#cb15-121" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  xx.STUDYID: xx.STUDYID</span></span>
-<span id="cb15-122"><a href="#cb15-122" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  xx.USUBJID: xx.USUBJID</span></span>
-<span id="cb15-123"><a href="#cb15-123" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.SUBJID: ADSL.SUBJID</span></span>
-<span id="cb15-124"><a href="#cb15-124" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.AGEU: ADSL.AGEU</span></span>
-<span id="cb15-125"><a href="#cb15-125" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.SAFFL if needed: ADSL.SAFFL if needed</span></span>
-<span id="cb15-126"><a href="#cb15-126" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.FASFL if needed: ADSL.FASFL if needed</span></span>
-<span id="cb15-127"><a href="#cb15-127" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.ITTFL if needed: ADSL.ITTFL if needed</span></span>
-<span id="cb15-128"><a href="#cb15-128" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.ITTEFL if required: ADSL.ITTEFL if required</span></span>
-<span id="cb15-129"><a href="#cb15-129" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.PPROTFL if needed: ADSL.PPROTFL if needed</span></span>
-<span id="cb15-130"><a href="#cb15-130" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRTSDT: ADSL.TRTSDT</span></span>
-<span id="cb15-131"><a href="#cb15-131" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRTEDT: ADSL.TRTEDT</span></span>
-<span id="cb15-132"><a href="#cb15-132" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TR01SDT: ADSL.TR01SDT</span></span>
-<span id="cb15-133"><a href="#cb15-133" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TR01EDT: ADSL.TR01EDT</span></span>
-<span id="cb15-134"><a href="#cb15-134" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CE.CESEQ: CE.CESEQ</span></span>
-<span id="cb15-135"><a href="#cb15-135" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CE.CEREFID: CE.CEREFID</span></span>
-<span id="cb15-136"><a href="#cb15-136" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CE.CETERM: CE.CETERM</span></span>
-<span id="cb15-137"><a href="#cb15-137" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Study-specific definition: Study-specific definition</span></span>
-<span id="cb15-138"><a href="#cb15-138" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CE.CNDPREV: CE.CNDPREV</span></span>
-<span id="cb15-139"><a href="#cb15-139" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CE.CESTDTC: CE.CESTDTC</span></span>
-<span id="cb15-140"><a href="#cb15-140" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.DTHFL: ADSL.DTHFL</span></span>
-<span id="cb15-141"><a href="#cb15-141" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.DTHFN: ADSL.DTHFN</span></span>
-<span id="cb15-142"><a href="#cb15-142" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.DTHDT: ADSL.DTHDT</span></span>
-<span id="cb15-143"><a href="#cb15-143" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Cause of Death.: Cause of Death.</span></span>
-<span id="cb15-144"><a href="#cb15-144" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.STUDYID: CM.STUDYID</span></span>
-<span id="cb15-145"><a href="#cb15-145" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.USUBJID: CM.USUBJID</span></span>
-<span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.SUBJID: CM.SUBJID</span></span>
-<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMSTDTC: CM.CMSTDTC</span></span>
-<span id="cb15-148"><a href="#cb15-148" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMSTRF: CM.CMSTRF</span></span>
-<span id="cb15-149"><a href="#cb15-149" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMENDTC: CM.CMENDTC</span></span>
-<span id="cb15-150"><a href="#cb15-150" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMENRF: CM.CMENRF</span></span>
-<span id="cb15-151"><a href="#cb15-151" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMSEQ: CM.CMSEQ</span></span>
-<span id="cb15-152"><a href="#cb15-152" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMREFID: CM.CMREFID</span></span>
-<span id="cb15-153"><a href="#cb15-153" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMTRT: CM.CMTRT</span></span>
-<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMCAT: CM.CMCAT</span></span>
-<span id="cb15-155"><a href="#cb15-155" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMSCAT: CM.CMSCAT</span></span>
-<span id="cb15-156"><a href="#cb15-156" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMINDC: CM.CMINDC</span></span>
-<span id="cb15-157"><a href="#cb15-157" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMDOSE: CM.CMDOSE</span></span>
-<span id="cb15-158"><a href="#cb15-158" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMDOSTXT: CM.CMDOSTXT</span></span>
-<span id="cb15-159"><a href="#cb15-159" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMDOSU: CM.CMDOSU</span></span>
-<span id="cb15-160"><a href="#cb15-160" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMDOSFRQ: CM.CMDOSFRQ</span></span>
-<span id="cb15-161"><a href="#cb15-161" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMROUTE: CM.CMROUTE</span></span>
-<span id="cb15-162"><a href="#cb15-162" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMPRESP: CM.CMPRESP</span></span>
-<span id="cb15-163"><a href="#cb15-163" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMCLAS: CM.CMCLAS</span></span>
-<span id="cb15-164"><a href="#cb15-164" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMCLASCD: CM.CMCLASCD</span></span>
-<span id="cb15-165"><a href="#cb15-165" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  GSKDRUG.CMATC1 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;: GSKDRUG.CMATC1 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;</span></span>
-<span id="cb15-166"><a href="#cb15-166" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  GSKDRUG.CMATC2 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;: GSKDRUG.CMATC2 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;</span></span>
-<span id="cb15-167"><a href="#cb15-167" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  GSKDRUG.CMATC3 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;: GSKDRUG.CMATC3 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;</span></span>
-<span id="cb15-168"><a href="#cb15-168" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  GSKDRUG.CMATC4 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;: GSKDRUG.CMATC4 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;</span></span>
-<span id="cb15-169"><a href="#cb15-169" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMDUR: CM.CMDUR</span></span>
-<span id="cb15-170"><a href="#cb15-170" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMOCCUR: CM.CMOCCUR</span></span>
-<span id="cb15-171"><a href="#cb15-171" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CM.CMDOSFRM: CM.CMDOSFRM</span></span>
-<span id="cb15-172"><a href="#cb15-172" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DA.STUDYID: DA.STUDYID</span></span>
-<span id="cb15-173"><a href="#cb15-173" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DA.USUBJID: DA.USUBJID</span></span>
-<span id="cb15-174"><a href="#cb15-174" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DA.SUBJID: DA.SUBJID</span></span>
-<span id="cb15-175"><a href="#cb15-175" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DA.VISITNUM: DA.VISITNUM</span></span>
-<span id="cb15-176"><a href="#cb15-176" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DA.VISIT: DA.VISIT</span></span>
-<span id="cb15-177"><a href="#cb15-177" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DA.DACAT: DA.DACAT</span></span>
-<span id="cb15-178"><a href="#cb15-178" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DA.DASCAT: DA.DASCAT</span></span>
-<span id="cb15-179"><a href="#cb15-179" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DA.DASEQ: DA.DASEQ</span></span>
-<span id="cb15-180"><a href="#cb15-180" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DA.DADTC: DA.DADTC</span></span>
-<span id="cb15-181"><a href="#cb15-181" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DA.DADY: DA.DADY</span></span>
-<span id="cb15-182"><a href="#cb15-182" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DA.DATEST and/or derived. Example contains &quot;Compliance %&quot;: DA.DATEST and/or derived. Example contains &quot;Compliance %&quot;</span></span>
-<span id="cb15-183"><a href="#cb15-183" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DA.DATESTCD and/or derived: DA.DATESTCD and/or derived</span></span>
-<span id="cb15-184"><a href="#cb15-184" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.STUDYID: ADSL.STUDYID</span></span>
-<span id="cb15-185"><a href="#cb15-185" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.USUBJID: ADSL.USUBJID</span></span>
-<span id="cb15-186"><a href="#cb15-186" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  FAAE.SUBJID: FAAE.SUBJID</span></span>
-<span id="cb15-187"><a href="#cb15-187" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  FAAE.FATPTREF: FAAE.FATPTREF</span></span>
-<span id="cb15-188"><a href="#cb15-188" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  FAAE.FATPTNUM: FAAE.FATPTNUM</span></span>
-<span id="cb15-189"><a href="#cb15-189" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  FAAE.FATPT: FAAE.FATPT</span></span>
-<span id="cb15-190"><a href="#cb15-190" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DD.STUDYID: DD.STUDYID</span></span>
-<span id="cb15-191"><a href="#cb15-191" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DD.USUBJID: DD.USUBJID</span></span>
-<span id="cb15-192"><a href="#cb15-192" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.ACTARM: ADSL.ACTARM</span></span>
-<span id="cb15-193"><a href="#cb15-193" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.ENRLFL: ADSL.ENRLFL</span></span>
-<span id="cb15-194"><a href="#cb15-194" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.AP01SDT: ADSL.AP01SDT</span></span>
-<span id="cb15-195"><a href="#cb15-195" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.AP01SDTM: ADSL.AP01SDTM</span></span>
-<span id="cb15-196"><a href="#cb15-196" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.AP01EDT: ADSL.AP01EDT</span></span>
-<span id="cb15-197"><a href="#cb15-197" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.AP01EDTM: ADSL.AP01EDTM</span></span>
-<span id="cb15-198"><a href="#cb15-198" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DD.DDTPTREF: DD.DDTPTREF</span></span>
-<span id="cb15-199"><a href="#cb15-199" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DD.DDTPTNUM: DD.DDTPTNUM</span></span>
-<span id="cb15-200"><a href="#cb15-200" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DD.DDTPT: DD.DDTPT</span></span>
-<span id="cb15-201"><a href="#cb15-201" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DS.STUDYID: DS.STUDYID</span></span>
-<span id="cb15-202"><a href="#cb15-202" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DS.USUBJID: DS.USUBJID</span></span>
-<span id="cb15-203"><a href="#cb15-203" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DS.SUBJID: DS.SUBJID</span></span>
-<span id="cb15-204"><a href="#cb15-204" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DS.DSSTDTC: DS.DSSTDTC</span></span>
-<span id="cb15-205"><a href="#cb15-205" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DS.DSSEQ: DS.DSSEQ</span></span>
-<span id="cb15-206"><a href="#cb15-206" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DM.STUDYID: DM.STUDYID</span></span>
-<span id="cb15-207"><a href="#cb15-207" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DM.USUBJID: DM.USUBJID</span></span>
-<span id="cb15-208"><a href="#cb15-208" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DQ.SUBJID: DQ.SUBJID</span></span>
-<span id="cb15-209"><a href="#cb15-209" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  SUPPDM.QVAL when QNAM=RACEOR or QNAM=RACEORx  where x=1,2, ..., n.: SUPPDM.QVAL when QNAM=RACEOR or QNAM=RACEORx  where x=1,2, ..., n.</span></span>
-<span id="cb15-210"><a href="#cb15-210" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.ARACE: ADSL.ARACE</span></span>
-<span id="cb15-211"><a href="#cb15-211" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.ARACEN: ADSL.ARACEN</span></span>
-<span id="cb15-212"><a href="#cb15-212" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.INVID: ADSL.INVID</span></span>
-<span id="cb15-213"><a href="#cb15-213" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.INVNAM: ADSL.INVNAM</span></span>
-<span id="cb15-214"><a href="#cb15-214" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.COUNTRY: ADSL.COUNTRY</span></span>
-<span id="cb15-215"><a href="#cb15-215" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.AGEGR1: ADSL.AGEGR1</span></span>
-<span id="cb15-216"><a href="#cb15-216" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.AGEGR1N: ADSL.AGEGR1N</span></span>
-<span id="cb15-217"><a href="#cb15-217" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.RACEN: ADSL.RACEN</span></span>
-<span id="cb15-218"><a href="#cb15-218" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.ETHNIC: ADSL.ETHNIC</span></span>
-<span id="cb15-219"><a href="#cb15-219" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.ETHNICN: ADSL.ETHNICN</span></span>
-<span id="cb15-220"><a href="#cb15-220" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TOTFL: ADSL.TOTFL</span></span>
-<span id="cb15-221"><a href="#cb15-221" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TOTFN: ADSL.TOTFN</span></span>
-<span id="cb15-222"><a href="#cb15-222" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.ITTFN: ADSL.ITTFN</span></span>
-<span id="cb15-223"><a href="#cb15-223" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.PPROTFN: ADSL.PPROTFN</span></span>
-<span id="cb15-224"><a href="#cb15-224" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.COMPLFL: ADSL.COMPLFL</span></span>
-<span id="cb15-225"><a href="#cb15-225" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.COMPLFN: ADSL.COMPLFN</span></span>
-<span id="cb15-226"><a href="#cb15-226" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.RUNFFL: ADSL.RUNFFL</span></span>
-<span id="cb15-227"><a href="#cb15-227" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.RUNFFN: ADSL.RUNFFN</span></span>
-<span id="cb15-228"><a href="#cb15-228" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.SCRFFL: ADSL.SCRFFL</span></span>
-<span id="cb15-229"><a href="#cb15-229" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.SCRFFN: ADSL.SCRFFN</span></span>
-<span id="cb15-230"><a href="#cb15-230" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.ARM: ADSL.ARM</span></span>
-<span id="cb15-231"><a href="#cb15-231" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.ARMCD: ADSL.ARMCD</span></span>
-<span id="cb15-232"><a href="#cb15-232" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRTxxP, where xx is the value for APERIOD: ADSL.TRTxxP, where xx is the value for APERIOD</span></span>
-<span id="cb15-233"><a href="#cb15-233" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.TRTxxA, where xx is the value for APERIOD: ADSL.TRTxxA, where xx is the value for APERIOD</span></span>
-<span id="cb15-234"><a href="#cb15-234" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.RANDDT: ADSL.RANDDT</span></span>
-<span id="cb15-235"><a href="#cb15-235" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.RFSTDT: ADSL.RFSTDT</span></span>
-<span id="cb15-236"><a href="#cb15-236" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.RFENDT: ADSL.RFENDT</span></span>
-<span id="cb15-237"><a href="#cb15-237" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.APxxSDT, where xx is the value for APERIOD: ADSL.APxxSDT, where xx is the value for APERIOD</span></span>
-<span id="cb15-238"><a href="#cb15-238" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADSL.APxxEDT, where xx is the value for APERIOD: ADSL.APxxEDT, where xx is the value for APERIOD</span></span>
-<span id="cb15-239"><a href="#cb15-239" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: The following variables have code ids not found in the codelist(s):</span></span>
-<span id="cb15-240"><a href="#cb15-240" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ASTDT</span></span>
-<span id="cb15-241"><a href="#cb15-241" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ASTTM</span></span>
-<span id="cb15-242"><a href="#cb15-242" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ASTDTM</span></span>
-<span id="cb15-243"><a href="#cb15-243" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AENDT</span></span>
-<span id="cb15-244"><a href="#cb15-244" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AENTM</span></span>
-<span id="cb15-245"><a href="#cb15-245" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AENDTM</span></span>
-<span id="cb15-246"><a href="#cb15-246" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AESTDTC</span></span>
-<span id="cb15-247"><a href="#cb15-247" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AEENDTC</span></span>
-<span id="cb15-248"><a href="#cb15-248" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AEDECOD</span></span>
-<span id="cb15-249"><a href="#cb15-249" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AEBODSYS</span></span>
-<span id="cb15-250"><a href="#cb15-250" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AEBDSYCD</span></span>
-<span id="cb15-251"><a href="#cb15-251" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AELLT</span></span>
-<span id="cb15-252"><a href="#cb15-252" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AELLTCD</span></span>
-<span id="cb15-253"><a href="#cb15-253" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AEPTCD</span></span>
-<span id="cb15-254"><a href="#cb15-254" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AEHLT</span></span>
-<span id="cb15-255"><a href="#cb15-255" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AEHLTCD</span></span>
-<span id="cb15-256"><a href="#cb15-256" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AEHLGT</span></span>
-<span id="cb15-257"><a href="#cb15-257" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AEHLGTCD</span></span>
-<span id="cb15-258"><a href="#cb15-258" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AESOC</span></span>
-<span id="cb15-259"><a href="#cb15-259" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AESOCCD</span></span>
-<span id="cb15-260"><a href="#cb15-260" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AEDUR</span></span>
-<span id="cb15-261"><a href="#cb15-261" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ASEVN</span></span>
-<span id="cb15-262"><a href="#cb15-262" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AEOUTN</span></span>
-<span id="cb15-263"><a href="#cb15-263" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AETOXGR</span></span>
-<span id="cb15-264"><a href="#cb15-264" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AETOXGRN</span></span>
-<span id="cb15-265"><a href="#cb15-265" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  TRTSDT</span></span>
-<span id="cb15-266"><a href="#cb15-266" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  TRTEDT</span></span>
-<span id="cb15-267"><a href="#cb15-267" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  TR01SDT</span></span>
-<span id="cb15-268"><a href="#cb15-268" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  TR01EDT</span></span>
-<span id="cb15-269"><a href="#cb15-269" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  DTHDT</span></span>
-<span id="cb15-270"><a href="#cb15-270" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  TPERIOD</span></span>
-<span id="cb15-271"><a href="#cb15-271" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  TPERIODC</span></span>
-<span id="cb15-272"><a href="#cb15-272" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  CMDUR</span></span>
-<span id="cb15-273"><a href="#cb15-273" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADT</span></span>
-<span id="cb15-274"><a href="#cb15-274" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ATM</span></span>
-<span id="cb15-275"><a href="#cb15-275" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ADTM</span></span>
-<span id="cb15-276"><a href="#cb15-276" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  PARAMCD</span></span>
-<span id="cb15-277"><a href="#cb15-277" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AP01SDT</span></span>
-<span id="cb15-278"><a href="#cb15-278" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AP01SDTM</span></span>
-<span id="cb15-279"><a href="#cb15-279" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AP01EDT</span></span>
-<span id="cb15-280"><a href="#cb15-280" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  AP01EDTM</span></span>
-<span id="cb15-281"><a href="#cb15-281" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  PARCAT1</span></span>
-<span id="cb15-282"><a href="#cb15-282" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  PARCAT1N</span></span>
-<span id="cb15-283"><a href="#cb15-283" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  PARAM</span></span>
-<span id="cb15-284"><a href="#cb15-284" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  PARAMCD</span></span>
-<span id="cb15-285"><a href="#cb15-285" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  RACEORCD</span></span>
-<span id="cb15-286"><a href="#cb15-286" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ARACE</span></span>
-<span id="cb15-287"><a href="#cb15-287" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  ETHNIC</span></span>
-<span id="cb15-288"><a href="#cb15-288" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb15-289"><a href="#cb15-289" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Metadata successfully imported</span></span>
-<span id="cb15-290"><a href="#cb15-290" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Metacore object contains metadata for 4 datasets</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">metacore</span>(ds_spec, ds_vars, var_spec, value_spec,</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>         derivation, codelist)</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co">#&gt; Warning: core from the ds_vars table only contain missing values.</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co">#&gt; supp_flag from the ds_vars table only contain missing values.</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co">#&gt; sig_dig from the value_spec table only contain missing values.</span></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co">#&gt; dataset from the supp table only contain missing values.</span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="co">#&gt; variable from the supp table only contain missing values.</span></span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a><span class="co">#&gt; idvar from the supp table only contain missing values.</span></span>
+<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="co">#&gt; qeval from the supp table only contain missing values.</span></span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a><span class="co">#&gt; Warning: The following variables have derivation ids not found in the derivations table:</span></span>
+<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a><span class="co">#&gt;  ASTDT</span></span>
+<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a><span class="co">#&gt;  ASTTM</span></span>
+<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a><span class="co">#&gt;  ASTDTM</span></span>
+<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a><span class="co">#&gt;  AENDT</span></span>
+<span id="cb15-21"><a href="#cb15-21" tabindex="-1"></a><span class="co">#&gt;  AENTM</span></span>
+<span id="cb15-22"><a href="#cb15-22" tabindex="-1"></a><span class="co">#&gt;  AENDTM</span></span>
+<span id="cb15-23"><a href="#cb15-23" tabindex="-1"></a><span class="co">#&gt;  AFTRTSTC</span></span>
+<span id="cb15-24"><a href="#cb15-24" tabindex="-1"></a><span class="co">#&gt;  ALTRTSTC</span></span>
+<span id="cb15-25"><a href="#cb15-25" tabindex="-1"></a><span class="co">#&gt;  APFTRSTC</span></span>
+<span id="cb15-26"><a href="#cb15-26" tabindex="-1"></a><span class="co">#&gt;  ASTDT</span></span>
+<span id="cb15-27"><a href="#cb15-27" tabindex="-1"></a><span class="co">#&gt;  AFTRTST</span></span>
+<span id="cb15-28"><a href="#cb15-28" tabindex="-1"></a><span class="co">#&gt;  AFTRTSTC</span></span>
+<span id="cb15-29"><a href="#cb15-29" tabindex="-1"></a><span class="co">#&gt;  ALTRTST</span></span>
+<span id="cb15-30"><a href="#cb15-30" tabindex="-1"></a><span class="co">#&gt;  ALTRTSTC</span></span>
+<span id="cb15-31"><a href="#cb15-31" tabindex="-1"></a><span class="co">#&gt;  ASTDT</span></span>
+<span id="cb15-32"><a href="#cb15-32" tabindex="-1"></a><span class="co">#&gt;  ASTTM</span></span>
+<span id="cb15-33"><a href="#cb15-33" tabindex="-1"></a><span class="co">#&gt;  ASTDTM</span></span>
+<span id="cb15-34"><a href="#cb15-34" tabindex="-1"></a><span class="co">#&gt;  AENDT</span></span>
+<span id="cb15-35"><a href="#cb15-35" tabindex="-1"></a><span class="co">#&gt;  AENTM</span></span>
+<span id="cb15-36"><a href="#cb15-36" tabindex="-1"></a><span class="co">#&gt;  AENDTM</span></span>
+<span id="cb15-37"><a href="#cb15-37" tabindex="-1"></a><span class="co">#&gt;  CMBASE</span></span>
+<span id="cb15-38"><a href="#cb15-38" tabindex="-1"></a><span class="co">#&gt;  CMBASECD</span></span>
+<span id="cb15-39"><a href="#cb15-39" tabindex="-1"></a><span class="co">#&gt;  DOSCUMA</span></span>
+<span id="cb15-40"><a href="#cb15-40" tabindex="-1"></a><span class="co">#&gt;  AVISIT</span></span>
+<span id="cb15-41"><a href="#cb15-41" tabindex="-1"></a><span class="co">#&gt;  ATPT</span></span>
+<span id="cb15-42"><a href="#cb15-42" tabindex="-1"></a><span class="co">#&gt;  ADT</span></span>
+<span id="cb15-43"><a href="#cb15-43" tabindex="-1"></a><span class="co">#&gt;  ATM</span></span>
+<span id="cb15-44"><a href="#cb15-44" tabindex="-1"></a><span class="co">#&gt;  ADTM</span></span>
+<span id="cb15-45"><a href="#cb15-45" tabindex="-1"></a><span class="co">#&gt;  APERADY</span></span>
+<span id="cb15-46"><a href="#cb15-46" tabindex="-1"></a><span class="co">#&gt;  APERSTDY</span></span>
+<span id="cb15-47"><a href="#cb15-47" tabindex="-1"></a><span class="co">#&gt;  APERENDY</span></span>
+<span id="cb15-48"><a href="#cb15-48" tabindex="-1"></a><span class="co">#&gt;  ADT</span></span>
+<span id="cb15-49"><a href="#cb15-49" tabindex="-1"></a><span class="co">#&gt;  ATM</span></span>
+<span id="cb15-50"><a href="#cb15-50" tabindex="-1"></a><span class="co">#&gt;  ADTM</span></span>
+<span id="cb15-51"><a href="#cb15-51" tabindex="-1"></a><span class="co">#&gt;  ADT</span></span>
+<span id="cb15-52"><a href="#cb15-52" tabindex="-1"></a><span class="co">#&gt;  ATM</span></span>
+<span id="cb15-53"><a href="#cb15-53" tabindex="-1"></a><span class="co">#&gt;  ADTM</span></span>
+<span id="cb15-54"><a href="#cb15-54" tabindex="-1"></a><span class="co">#&gt; Warning: The following derivations are never used:</span></span>
+<span id="cb15-55"><a href="#cb15-55" tabindex="-1"></a><span class="co">#&gt;  pred.AE.STUDYID: AE.STUDYID</span></span>
+<span id="cb15-56"><a href="#cb15-56" tabindex="-1"></a><span class="co">#&gt;  pred.AE.USUBJID: AE.USUBJID</span></span>
+<span id="cb15-57"><a href="#cb15-57" tabindex="-1"></a><span class="co">#&gt;  pred.AE.SUBJID: AE.SUBJID</span></span>
+<span id="cb15-58"><a href="#cb15-58" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.SITEID: ADSL.SITEID</span></span>
+<span id="cb15-59"><a href="#cb15-59" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.AGE: ADSL.AGE</span></span>
+<span id="cb15-60"><a href="#cb15-60" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.SEX: ADSL.SEX</span></span>
+<span id="cb15-61"><a href="#cb15-61" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.RACE: ADSL.RACE</span></span>
+<span id="cb15-62"><a href="#cb15-62" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.ACOUNTRY: ADSL.ACOUNTRY</span></span>
+<span id="cb15-63"><a href="#cb15-63" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.FASFL: ADSL.FASFL</span></span>
+<span id="cb15-64"><a href="#cb15-64" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.ITTFL: ADSL.ITTFL</span></span>
+<span id="cb15-65"><a href="#cb15-65" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.SAFFL: ADSL.SAFFL</span></span>
+<span id="cb15-66"><a href="#cb15-66" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.PPROTFL: ADSL.PPROTFL</span></span>
+<span id="cb15-67"><a href="#cb15-67" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRTxxPN that corresponds to the treatment selected in TRTP: ADSL.TRTxxPN that corresponds to the treatment selected in TRTP</span></span>
+<span id="cb15-68"><a href="#cb15-68" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRTxxAN that corresponds to the treatment selected in TRTA: ADSL.TRTxxAN that corresponds to the treatment selected in TRTA</span></span>
+<span id="cb15-69"><a href="#cb15-69" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRT01A: ADSL.TRT01A</span></span>
+<span id="cb15-70"><a href="#cb15-70" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRT01AN: ADSL.TRT01AN</span></span>
+<span id="cb15-71"><a href="#cb15-71" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRT01P: ADSL.TRT01P</span></span>
+<span id="cb15-72"><a href="#cb15-72" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRT01PN: ADSL.TRT01PN</span></span>
+<span id="cb15-73"><a href="#cb15-73" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRTSEQP: ADSL.TRTSEQP</span></span>
+<span id="cb15-74"><a href="#cb15-74" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRTSEQPN: ADSL.TRTSEQPN</span></span>
+<span id="cb15-75"><a href="#cb15-75" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRTSEQA: ADSL.TRTSEQA</span></span>
+<span id="cb15-76"><a href="#cb15-76" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRTSEQAN: ADSL.TRTSEQAN</span></span>
+<span id="cb15-77"><a href="#cb15-77" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESTDY: AE.AESTDY</span></span>
+<span id="cb15-78"><a href="#cb15-78" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESTDTC: AE.AESTDTC</span></span>
+<span id="cb15-79"><a href="#cb15-79" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEENDTC: AE.AEENDTC</span></span>
+<span id="cb15-80"><a href="#cb15-80" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEENDY: AE.AEENDY</span></span>
+<span id="cb15-81"><a href="#cb15-81" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESEQ: AE.AESEQ</span></span>
+<span id="cb15-82"><a href="#cb15-82" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AETERM: AE.AETERM</span></span>
+<span id="cb15-83"><a href="#cb15-83" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEMODIFY: AE.AEMODIFY</span></span>
+<span id="cb15-84"><a href="#cb15-84" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEDECOD: AE.AEDECOD</span></span>
+<span id="cb15-85"><a href="#cb15-85" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEBODSYS: AE.AEBODSYS</span></span>
+<span id="cb15-86"><a href="#cb15-86" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEBDSYCD: AE.AEBDSYCD</span></span>
+<span id="cb15-87"><a href="#cb15-87" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AELLT: AE.AELLT</span></span>
+<span id="cb15-88"><a href="#cb15-88" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AELLTCD: AE.AELLTCD</span></span>
+<span id="cb15-89"><a href="#cb15-89" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEPTCD: AE.AEPTCD</span></span>
+<span id="cb15-90"><a href="#cb15-90" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEHLT: AE.AEHLT</span></span>
+<span id="cb15-91"><a href="#cb15-91" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEHLTCD: AE.AEHLTCD</span></span>
+<span id="cb15-92"><a href="#cb15-92" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEHLGT: AE.AEHLGT</span></span>
+<span id="cb15-93"><a href="#cb15-93" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEHLGTCD: AE.AEHLGTCD</span></span>
+<span id="cb15-94"><a href="#cb15-94" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESOC: AE.AESOC</span></span>
+<span id="cb15-95"><a href="#cb15-95" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESOCCD: AE.AESOCCD</span></span>
+<span id="cb15-96"><a href="#cb15-96" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEDUR: AE.AEDUR</span></span>
+<span id="cb15-97"><a href="#cb15-97" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESEV: AE.AESEV</span></span>
+<span id="cb15-98"><a href="#cb15-98" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESEV or as per RAP: AE.AESEV or as per RAP</span></span>
+<span id="cb15-99"><a href="#cb15-99" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEACN: AE.AEACN</span></span>
+<span id="cb15-100"><a href="#cb15-100" tabindex="-1"></a><span class="co">#&gt;  pred.SUPPAE.QVAL where SUPPAE.QNAM=&quot;ACT1&quot;: SUPPAE.QVAL where SUPPAE.QNAM=&quot;ACT1&quot;</span></span>
+<span id="cb15-101"><a href="#cb15-101" tabindex="-1"></a><span class="co">#&gt;  pred.SUPPAE.QVAL where QNAM=&quot;AETRTEM&quot;: SUPPAE.QVAL where QNAM=&quot;AETRTEM&quot;</span></span>
+<span id="cb15-102"><a href="#cb15-102" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEREFID: AE.AEREFID</span></span>
+<span id="cb15-103"><a href="#cb15-103" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEACNOTH: AE.AEACNOTH</span></span>
+<span id="cb15-104"><a href="#cb15-104" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESER: AE.AESER</span></span>
+<span id="cb15-105"><a href="#cb15-105" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESCAN: AE.AESCAN</span></span>
+<span id="cb15-106"><a href="#cb15-106" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESCONG: AE.AESCONG</span></span>
+<span id="cb15-107"><a href="#cb15-107" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESDISAB: AE.AESDISAB</span></span>
+<span id="cb15-108"><a href="#cb15-108" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESDTH: AE.AESDTH</span></span>
+<span id="cb15-109"><a href="#cb15-109" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESHOSP: AE.AESHOSP</span></span>
+<span id="cb15-110"><a href="#cb15-110" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESLIFE: AE.AESLIFE</span></span>
+<span id="cb15-111"><a href="#cb15-111" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESOD: AE.AESOD</span></span>
+<span id="cb15-112"><a href="#cb15-112" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AESMIE: AE.AESMIE</span></span>
+<span id="cb15-113"><a href="#cb15-113" tabindex="-1"></a><span class="co">#&gt;  pred.SUPPAE.QVAL where QNAM=&quot;AESPROT&quot;: SUPPAE.QVAL where QNAM=&quot;AESPROT&quot;</span></span>
+<span id="cb15-114"><a href="#cb15-114" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEOUT: AE.AEOUT</span></span>
+<span id="cb15-115"><a href="#cb15-115" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AEREL: AE.AEREL</span></span>
+<span id="cb15-116"><a href="#cb15-116" tabindex="-1"></a><span class="co">#&gt;  pred.AE.AETOXGR: AE.AETOXGR</span></span>
+<span id="cb15-117"><a href="#cb15-117" tabindex="-1"></a><span class="co">#&gt;  pred.Numeric version of AETOXGR: Numeric version of AETOXGR</span></span>
+<span id="cb15-118"><a href="#cb15-118" tabindex="-1"></a><span class="co">#&gt;  pred.SUPPAE.QVAL where SUPPAE.QNAM=&quot;GRADED&quot;: SUPPAE.QVAL where SUPPAE.QNAM=&quot;GRADED&quot;</span></span>
+<span id="cb15-119"><a href="#cb15-119" tabindex="-1"></a><span class="co">#&gt;  pred.SUPPAE.QVAL where SUPPAE.QNAM=&quot;AEDLT&quot;: SUPPAE.QVAL where SUPPAE.QNAM=&quot;AEDLT&quot;</span></span>
+<span id="cb15-120"><a href="#cb15-120" tabindex="-1"></a><span class="co">#&gt;  pred.SUPPAE.QVAL where SUPPAE.QNAM=&quot;AERDG1&quot;: SUPPAE.QVAL where SUPPAE.QNAM=&quot;AERDG1&quot;</span></span>
+<span id="cb15-121"><a href="#cb15-121" tabindex="-1"></a><span class="co">#&gt;  pred.xx.STUDYID: xx.STUDYID</span></span>
+<span id="cb15-122"><a href="#cb15-122" tabindex="-1"></a><span class="co">#&gt;  pred.xx.USUBJID: xx.USUBJID</span></span>
+<span id="cb15-123"><a href="#cb15-123" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.SUBJID: ADSL.SUBJID</span></span>
+<span id="cb15-124"><a href="#cb15-124" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.AGEU: ADSL.AGEU</span></span>
+<span id="cb15-125"><a href="#cb15-125" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.SAFFL if needed: ADSL.SAFFL if needed</span></span>
+<span id="cb15-126"><a href="#cb15-126" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.FASFL if needed: ADSL.FASFL if needed</span></span>
+<span id="cb15-127"><a href="#cb15-127" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.ITTFL if needed: ADSL.ITTFL if needed</span></span>
+<span id="cb15-128"><a href="#cb15-128" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.ITTEFL if required: ADSL.ITTEFL if required</span></span>
+<span id="cb15-129"><a href="#cb15-129" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.PPROTFL if needed: ADSL.PPROTFL if needed</span></span>
+<span id="cb15-130"><a href="#cb15-130" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRTSDT: ADSL.TRTSDT</span></span>
+<span id="cb15-131"><a href="#cb15-131" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRTEDT: ADSL.TRTEDT</span></span>
+<span id="cb15-132"><a href="#cb15-132" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TR01SDT: ADSL.TR01SDT</span></span>
+<span id="cb15-133"><a href="#cb15-133" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TR01EDT: ADSL.TR01EDT</span></span>
+<span id="cb15-134"><a href="#cb15-134" tabindex="-1"></a><span class="co">#&gt;  pred.CE.CESEQ: CE.CESEQ</span></span>
+<span id="cb15-135"><a href="#cb15-135" tabindex="-1"></a><span class="co">#&gt;  pred.CE.CEREFID: CE.CEREFID</span></span>
+<span id="cb15-136"><a href="#cb15-136" tabindex="-1"></a><span class="co">#&gt;  pred.CE.CETERM: CE.CETERM</span></span>
+<span id="cb15-137"><a href="#cb15-137" tabindex="-1"></a><span class="co">#&gt;  pred.Study-specific definition: Study-specific definition</span></span>
+<span id="cb15-138"><a href="#cb15-138" tabindex="-1"></a><span class="co">#&gt;  pred.CE.CNDPREV: CE.CNDPREV</span></span>
+<span id="cb15-139"><a href="#cb15-139" tabindex="-1"></a><span class="co">#&gt;  pred.CE.CESTDTC: CE.CESTDTC</span></span>
+<span id="cb15-140"><a href="#cb15-140" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.DTHFL: ADSL.DTHFL</span></span>
+<span id="cb15-141"><a href="#cb15-141" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.DTHFN: ADSL.DTHFN</span></span>
+<span id="cb15-142"><a href="#cb15-142" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.DTHDT: ADSL.DTHDT</span></span>
+<span id="cb15-143"><a href="#cb15-143" tabindex="-1"></a><span class="co">#&gt;  pred.Cause of Death.: Cause of Death.</span></span>
+<span id="cb15-144"><a href="#cb15-144" tabindex="-1"></a><span class="co">#&gt;  pred.CM.STUDYID: CM.STUDYID</span></span>
+<span id="cb15-145"><a href="#cb15-145" tabindex="-1"></a><span class="co">#&gt;  pred.CM.USUBJID: CM.USUBJID</span></span>
+<span id="cb15-146"><a href="#cb15-146" tabindex="-1"></a><span class="co">#&gt;  pred.CM.SUBJID: CM.SUBJID</span></span>
+<span id="cb15-147"><a href="#cb15-147" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMSTDTC: CM.CMSTDTC</span></span>
+<span id="cb15-148"><a href="#cb15-148" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMSTRF: CM.CMSTRF</span></span>
+<span id="cb15-149"><a href="#cb15-149" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMENDTC: CM.CMENDTC</span></span>
+<span id="cb15-150"><a href="#cb15-150" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMENRF: CM.CMENRF</span></span>
+<span id="cb15-151"><a href="#cb15-151" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMSEQ: CM.CMSEQ</span></span>
+<span id="cb15-152"><a href="#cb15-152" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMREFID: CM.CMREFID</span></span>
+<span id="cb15-153"><a href="#cb15-153" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMTRT: CM.CMTRT</span></span>
+<span id="cb15-154"><a href="#cb15-154" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMCAT: CM.CMCAT</span></span>
+<span id="cb15-155"><a href="#cb15-155" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMSCAT: CM.CMSCAT</span></span>
+<span id="cb15-156"><a href="#cb15-156" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMINDC: CM.CMINDC</span></span>
+<span id="cb15-157"><a href="#cb15-157" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMDOSE: CM.CMDOSE</span></span>
+<span id="cb15-158"><a href="#cb15-158" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMDOSTXT: CM.CMDOSTXT</span></span>
+<span id="cb15-159"><a href="#cb15-159" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMDOSU: CM.CMDOSU</span></span>
+<span id="cb15-160"><a href="#cb15-160" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMDOSFRQ: CM.CMDOSFRQ</span></span>
+<span id="cb15-161"><a href="#cb15-161" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMROUTE: CM.CMROUTE</span></span>
+<span id="cb15-162"><a href="#cb15-162" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMPRESP: CM.CMPRESP</span></span>
+<span id="cb15-163"><a href="#cb15-163" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMCLAS: CM.CMCLAS</span></span>
+<span id="cb15-164"><a href="#cb15-164" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMCLASCD: CM.CMCLASCD</span></span>
+<span id="cb15-165"><a href="#cb15-165" tabindex="-1"></a><span class="co">#&gt;  pred.GSKDRUG.CMATC1 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;: GSKDRUG.CMATC1 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;</span></span>
+<span id="cb15-166"><a href="#cb15-166" tabindex="-1"></a><span class="co">#&gt;  pred.GSKDRUG.CMATC2 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;: GSKDRUG.CMATC2 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;</span></span>
+<span id="cb15-167"><a href="#cb15-167" tabindex="-1"></a><span class="co">#&gt;  pred.GSKDRUG.CMATC3 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;: GSKDRUG.CMATC3 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;</span></span>
+<span id="cb15-168"><a href="#cb15-168" tabindex="-1"></a><span class="co">#&gt;  pred.GSKDRUG.CMATC4 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;: GSKDRUG.CMATC4 where GSKDRUG.CMDRGCOL = CM.DRGCOLCD and GSKDRUG.CMNC = &#39;C&#39;</span></span>
+<span id="cb15-169"><a href="#cb15-169" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMDUR: CM.CMDUR</span></span>
+<span id="cb15-170"><a href="#cb15-170" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMOCCUR: CM.CMOCCUR</span></span>
+<span id="cb15-171"><a href="#cb15-171" tabindex="-1"></a><span class="co">#&gt;  pred.CM.CMDOSFRM: CM.CMDOSFRM</span></span>
+<span id="cb15-172"><a href="#cb15-172" tabindex="-1"></a><span class="co">#&gt;  pred.DA.STUDYID: DA.STUDYID</span></span>
+<span id="cb15-173"><a href="#cb15-173" tabindex="-1"></a><span class="co">#&gt;  pred.DA.USUBJID: DA.USUBJID</span></span>
+<span id="cb15-174"><a href="#cb15-174" tabindex="-1"></a><span class="co">#&gt;  pred.DA.SUBJID: DA.SUBJID</span></span>
+<span id="cb15-175"><a href="#cb15-175" tabindex="-1"></a><span class="co">#&gt;  pred.DA.VISITNUM: DA.VISITNUM</span></span>
+<span id="cb15-176"><a href="#cb15-176" tabindex="-1"></a><span class="co">#&gt;  pred.DA.VISIT: DA.VISIT</span></span>
+<span id="cb15-177"><a href="#cb15-177" tabindex="-1"></a><span class="co">#&gt;  pred.DA.DACAT: DA.DACAT</span></span>
+<span id="cb15-178"><a href="#cb15-178" tabindex="-1"></a><span class="co">#&gt;  pred.DA.DASCAT: DA.DASCAT</span></span>
+<span id="cb15-179"><a href="#cb15-179" tabindex="-1"></a><span class="co">#&gt;  pred.DA.DASEQ: DA.DASEQ</span></span>
+<span id="cb15-180"><a href="#cb15-180" tabindex="-1"></a><span class="co">#&gt;  pred.DA.DADTC: DA.DADTC</span></span>
+<span id="cb15-181"><a href="#cb15-181" tabindex="-1"></a><span class="co">#&gt;  pred.DA.DADY: DA.DADY</span></span>
+<span id="cb15-182"><a href="#cb15-182" tabindex="-1"></a><span class="co">#&gt;  pred.DA.DATEST and/or derived. Example contains &quot;Compliance %&quot;: DA.DATEST and/or derived. Example contains &quot;Compliance %&quot;</span></span>
+<span id="cb15-183"><a href="#cb15-183" tabindex="-1"></a><span class="co">#&gt;  pred.DA.DATESTCD and/or derived: DA.DATESTCD and/or derived</span></span>
+<span id="cb15-184"><a href="#cb15-184" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.STUDYID: ADSL.STUDYID</span></span>
+<span id="cb15-185"><a href="#cb15-185" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.USUBJID: ADSL.USUBJID</span></span>
+<span id="cb15-186"><a href="#cb15-186" tabindex="-1"></a><span class="co">#&gt;  pred.FAAE.SUBJID: FAAE.SUBJID</span></span>
+<span id="cb15-187"><a href="#cb15-187" tabindex="-1"></a><span class="co">#&gt;  pred.FAAE.FATPTREF: FAAE.FATPTREF</span></span>
+<span id="cb15-188"><a href="#cb15-188" tabindex="-1"></a><span class="co">#&gt;  pred.FAAE.FATPTNUM: FAAE.FATPTNUM</span></span>
+<span id="cb15-189"><a href="#cb15-189" tabindex="-1"></a><span class="co">#&gt;  pred.FAAE.FATPT: FAAE.FATPT</span></span>
+<span id="cb15-190"><a href="#cb15-190" tabindex="-1"></a><span class="co">#&gt;  pred.DD.STUDYID: DD.STUDYID</span></span>
+<span id="cb15-191"><a href="#cb15-191" tabindex="-1"></a><span class="co">#&gt;  pred.DD.USUBJID: DD.USUBJID</span></span>
+<span id="cb15-192"><a href="#cb15-192" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.ACTARM: ADSL.ACTARM</span></span>
+<span id="cb15-193"><a href="#cb15-193" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.ENRLFL: ADSL.ENRLFL</span></span>
+<span id="cb15-194"><a href="#cb15-194" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.AP01SDT: ADSL.AP01SDT</span></span>
+<span id="cb15-195"><a href="#cb15-195" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.AP01SDTM: ADSL.AP01SDTM</span></span>
+<span id="cb15-196"><a href="#cb15-196" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.AP01EDT: ADSL.AP01EDT</span></span>
+<span id="cb15-197"><a href="#cb15-197" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.AP01EDTM: ADSL.AP01EDTM</span></span>
+<span id="cb15-198"><a href="#cb15-198" tabindex="-1"></a><span class="co">#&gt;  pred.DD.DDTPTREF: DD.DDTPTREF</span></span>
+<span id="cb15-199"><a href="#cb15-199" tabindex="-1"></a><span class="co">#&gt;  pred.DD.DDTPTNUM: DD.DDTPTNUM</span></span>
+<span id="cb15-200"><a href="#cb15-200" tabindex="-1"></a><span class="co">#&gt;  pred.DD.DDTPT: DD.DDTPT</span></span>
+<span id="cb15-201"><a href="#cb15-201" tabindex="-1"></a><span class="co">#&gt;  pred.DS.STUDYID: DS.STUDYID</span></span>
+<span id="cb15-202"><a href="#cb15-202" tabindex="-1"></a><span class="co">#&gt;  pred.DS.USUBJID: DS.USUBJID</span></span>
+<span id="cb15-203"><a href="#cb15-203" tabindex="-1"></a><span class="co">#&gt;  pred.DS.SUBJID: DS.SUBJID</span></span>
+<span id="cb15-204"><a href="#cb15-204" tabindex="-1"></a><span class="co">#&gt;  pred.DS.DSSTDTC: DS.DSSTDTC</span></span>
+<span id="cb15-205"><a href="#cb15-205" tabindex="-1"></a><span class="co">#&gt;  pred.DS.DSSEQ: DS.DSSEQ</span></span>
+<span id="cb15-206"><a href="#cb15-206" tabindex="-1"></a><span class="co">#&gt;  pred.DM.STUDYID: DM.STUDYID</span></span>
+<span id="cb15-207"><a href="#cb15-207" tabindex="-1"></a><span class="co">#&gt;  pred.DM.USUBJID: DM.USUBJID</span></span>
+<span id="cb15-208"><a href="#cb15-208" tabindex="-1"></a><span class="co">#&gt;  pred.DQ.SUBJID: DQ.SUBJID</span></span>
+<span id="cb15-209"><a href="#cb15-209" tabindex="-1"></a><span class="co">#&gt;  pred.SUPPDM.QVAL when QNAM=RACEOR or QNAM=RACEORx  where x=1,2, ..., n.: SUPPDM.QVAL when QNAM=RACEOR or QNAM=RACEORx  where x=1,2, ..., n.</span></span>
+<span id="cb15-210"><a href="#cb15-210" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.ARACE: ADSL.ARACE</span></span>
+<span id="cb15-211"><a href="#cb15-211" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.ARACEN: ADSL.ARACEN</span></span>
+<span id="cb15-212"><a href="#cb15-212" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.INVID: ADSL.INVID</span></span>
+<span id="cb15-213"><a href="#cb15-213" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.INVNAM: ADSL.INVNAM</span></span>
+<span id="cb15-214"><a href="#cb15-214" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.COUNTRY: ADSL.COUNTRY</span></span>
+<span id="cb15-215"><a href="#cb15-215" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.AGEGR1: ADSL.AGEGR1</span></span>
+<span id="cb15-216"><a href="#cb15-216" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.AGEGR1N: ADSL.AGEGR1N</span></span>
+<span id="cb15-217"><a href="#cb15-217" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.RACEN: ADSL.RACEN</span></span>
+<span id="cb15-218"><a href="#cb15-218" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.ETHNIC: ADSL.ETHNIC</span></span>
+<span id="cb15-219"><a href="#cb15-219" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.ETHNICN: ADSL.ETHNICN</span></span>
+<span id="cb15-220"><a href="#cb15-220" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TOTFL: ADSL.TOTFL</span></span>
+<span id="cb15-221"><a href="#cb15-221" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TOTFN: ADSL.TOTFN</span></span>
+<span id="cb15-222"><a href="#cb15-222" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.ITTFN: ADSL.ITTFN</span></span>
+<span id="cb15-223"><a href="#cb15-223" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.PPROTFN: ADSL.PPROTFN</span></span>
+<span id="cb15-224"><a href="#cb15-224" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.COMPLFL: ADSL.COMPLFL</span></span>
+<span id="cb15-225"><a href="#cb15-225" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.COMPLFN: ADSL.COMPLFN</span></span>
+<span id="cb15-226"><a href="#cb15-226" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.RUNFFL: ADSL.RUNFFL</span></span>
+<span id="cb15-227"><a href="#cb15-227" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.RUNFFN: ADSL.RUNFFN</span></span>
+<span id="cb15-228"><a href="#cb15-228" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.SCRFFL: ADSL.SCRFFL</span></span>
+<span id="cb15-229"><a href="#cb15-229" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.SCRFFN: ADSL.SCRFFN</span></span>
+<span id="cb15-230"><a href="#cb15-230" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.ARM: ADSL.ARM</span></span>
+<span id="cb15-231"><a href="#cb15-231" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.ARMCD: ADSL.ARMCD</span></span>
+<span id="cb15-232"><a href="#cb15-232" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRTxxP, where xx is the value for APERIOD: ADSL.TRTxxP, where xx is the value for APERIOD</span></span>
+<span id="cb15-233"><a href="#cb15-233" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.TRTxxA, where xx is the value for APERIOD: ADSL.TRTxxA, where xx is the value for APERIOD</span></span>
+<span id="cb15-234"><a href="#cb15-234" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.RANDDT: ADSL.RANDDT</span></span>
+<span id="cb15-235"><a href="#cb15-235" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.RFSTDT: ADSL.RFSTDT</span></span>
+<span id="cb15-236"><a href="#cb15-236" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.RFENDT: ADSL.RFENDT</span></span>
+<span id="cb15-237"><a href="#cb15-237" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.APxxSDT, where xx is the value for APERIOD: ADSL.APxxSDT, where xx is the value for APERIOD</span></span>
+<span id="cb15-238"><a href="#cb15-238" tabindex="-1"></a><span class="co">#&gt;  pred.ADSL.APxxEDT, where xx is the value for APERIOD: ADSL.APxxEDT, where xx is the value for APERIOD</span></span>
+<span id="cb15-239"><a href="#cb15-239" tabindex="-1"></a><span class="co">#&gt; Warning: The following variables have code ids not found in the codelist(s):</span></span>
+<span id="cb15-240"><a href="#cb15-240" tabindex="-1"></a><span class="co">#&gt;  ASTDT</span></span>
+<span id="cb15-241"><a href="#cb15-241" tabindex="-1"></a><span class="co">#&gt;  ASTTM</span></span>
+<span id="cb15-242"><a href="#cb15-242" tabindex="-1"></a><span class="co">#&gt;  ASTDTM</span></span>
+<span id="cb15-243"><a href="#cb15-243" tabindex="-1"></a><span class="co">#&gt;  AENDT</span></span>
+<span id="cb15-244"><a href="#cb15-244" tabindex="-1"></a><span class="co">#&gt;  AENTM</span></span>
+<span id="cb15-245"><a href="#cb15-245" tabindex="-1"></a><span class="co">#&gt;  AENDTM</span></span>
+<span id="cb15-246"><a href="#cb15-246" tabindex="-1"></a><span class="co">#&gt;  AESTDTC</span></span>
+<span id="cb15-247"><a href="#cb15-247" tabindex="-1"></a><span class="co">#&gt;  AEENDTC</span></span>
+<span id="cb15-248"><a href="#cb15-248" tabindex="-1"></a><span class="co">#&gt;  AEDECOD</span></span>
+<span id="cb15-249"><a href="#cb15-249" tabindex="-1"></a><span class="co">#&gt;  AEBODSYS</span></span>
+<span id="cb15-250"><a href="#cb15-250" tabindex="-1"></a><span class="co">#&gt;  AEBDSYCD</span></span>
+<span id="cb15-251"><a href="#cb15-251" tabindex="-1"></a><span class="co">#&gt;  AELLT</span></span>
+<span id="cb15-252"><a href="#cb15-252" tabindex="-1"></a><span class="co">#&gt;  AELLTCD</span></span>
+<span id="cb15-253"><a href="#cb15-253" tabindex="-1"></a><span class="co">#&gt;  AEPTCD</span></span>
+<span id="cb15-254"><a href="#cb15-254" tabindex="-1"></a><span class="co">#&gt;  AEHLT</span></span>
+<span id="cb15-255"><a href="#cb15-255" tabindex="-1"></a><span class="co">#&gt;  AEHLTCD</span></span>
+<span id="cb15-256"><a href="#cb15-256" tabindex="-1"></a><span class="co">#&gt;  AEHLGT</span></span>
+<span id="cb15-257"><a href="#cb15-257" tabindex="-1"></a><span class="co">#&gt;  AEHLGTCD</span></span>
+<span id="cb15-258"><a href="#cb15-258" tabindex="-1"></a><span class="co">#&gt;  AESOC</span></span>
+<span id="cb15-259"><a href="#cb15-259" tabindex="-1"></a><span class="co">#&gt;  AESOCCD</span></span>
+<span id="cb15-260"><a href="#cb15-260" tabindex="-1"></a><span class="co">#&gt;  AEDUR</span></span>
+<span id="cb15-261"><a href="#cb15-261" tabindex="-1"></a><span class="co">#&gt;  ASEVN</span></span>
+<span id="cb15-262"><a href="#cb15-262" tabindex="-1"></a><span class="co">#&gt;  AEOUTN</span></span>
+<span id="cb15-263"><a href="#cb15-263" tabindex="-1"></a><span class="co">#&gt;  AETOXGR</span></span>
+<span id="cb15-264"><a href="#cb15-264" tabindex="-1"></a><span class="co">#&gt;  AETOXGRN</span></span>
+<span id="cb15-265"><a href="#cb15-265" tabindex="-1"></a><span class="co">#&gt;  TRTSDT</span></span>
+<span id="cb15-266"><a href="#cb15-266" tabindex="-1"></a><span class="co">#&gt;  TRTEDT</span></span>
+<span id="cb15-267"><a href="#cb15-267" tabindex="-1"></a><span class="co">#&gt;  TR01SDT</span></span>
+<span id="cb15-268"><a href="#cb15-268" tabindex="-1"></a><span class="co">#&gt;  TR01EDT</span></span>
+<span id="cb15-269"><a href="#cb15-269" tabindex="-1"></a><span class="co">#&gt;  DTHDT</span></span>
+<span id="cb15-270"><a href="#cb15-270" tabindex="-1"></a><span class="co">#&gt;  TPERIOD</span></span>
+<span id="cb15-271"><a href="#cb15-271" tabindex="-1"></a><span class="co">#&gt;  TPERIODC</span></span>
+<span id="cb15-272"><a href="#cb15-272" tabindex="-1"></a><span class="co">#&gt;  CMDUR</span></span>
+<span id="cb15-273"><a href="#cb15-273" tabindex="-1"></a><span class="co">#&gt;  ADT</span></span>
+<span id="cb15-274"><a href="#cb15-274" tabindex="-1"></a><span class="co">#&gt;  ATM</span></span>
+<span id="cb15-275"><a href="#cb15-275" tabindex="-1"></a><span class="co">#&gt;  ADTM</span></span>
+<span id="cb15-276"><a href="#cb15-276" tabindex="-1"></a><span class="co">#&gt;  PARAMCD</span></span>
+<span id="cb15-277"><a href="#cb15-277" tabindex="-1"></a><span class="co">#&gt;  AP01SDT</span></span>
+<span id="cb15-278"><a href="#cb15-278" tabindex="-1"></a><span class="co">#&gt;  AP01SDTM</span></span>
+<span id="cb15-279"><a href="#cb15-279" tabindex="-1"></a><span class="co">#&gt;  AP01EDT</span></span>
+<span id="cb15-280"><a href="#cb15-280" tabindex="-1"></a><span class="co">#&gt;  AP01EDTM</span></span>
+<span id="cb15-281"><a href="#cb15-281" tabindex="-1"></a><span class="co">#&gt;  PARCAT1</span></span>
+<span id="cb15-282"><a href="#cb15-282" tabindex="-1"></a><span class="co">#&gt;  PARCAT1N</span></span>
+<span id="cb15-283"><a href="#cb15-283" tabindex="-1"></a><span class="co">#&gt;  PARAM</span></span>
+<span id="cb15-284"><a href="#cb15-284" tabindex="-1"></a><span class="co">#&gt;  PARAMCD</span></span>
+<span id="cb15-285"><a href="#cb15-285" tabindex="-1"></a><span class="co">#&gt;  RACEORCD</span></span>
+<span id="cb15-286"><a href="#cb15-286" tabindex="-1"></a><span class="co">#&gt;  ARACE</span></span>
+<span id="cb15-287"><a href="#cb15-287" tabindex="-1"></a><span class="co">#&gt;  ETHNIC</span></span>
+<span id="cb15-288"><a href="#cb15-288" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb15-289"><a href="#cb15-289" tabindex="-1"></a><span class="co">#&gt;  Metadata successfully imported</span></span>
+<span id="cb15-290"><a href="#cb15-290" tabindex="-1"></a><span class="co">#&gt; Metacore object contains metadata for 4 datasets</span></span></code></pre></div>
 <p>And we’re good to go!</p>
 
 
